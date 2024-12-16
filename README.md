@@ -49,6 +49,10 @@ options:
 
 ### - assembleGenome.py
 
+**Dependencies**
+This script requires Python 3.6+ and the following libraries:
+pip install biopython
+
 **This script automatically extracts and compares features, and aligns and assembles annotated CDS regions from sequence files downloaded from NCBI**
 
 ```

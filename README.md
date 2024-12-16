@@ -77,13 +77,12 @@ Process GenBank files and extract gene names and sequences.
 
 options:
   -h, --help            show this help message and exit
-  -i INPUT [INPUT ...], --input INPUT [INPUT ...]
-                        Paths to the GenBank files
-  -f FEATURE_SUMMARY, --feature_summary FEATURE_SUMMARY
-                        Base path for feature summary files (CSV and XLSX)
+  -i, --input INPUT     Path to the GenBank files
+  -f, --feature_summary FEATURE_SUMMARY
+                        Path for feature summary files (CSV and XLSX)
   -g, --group_feature_summary
                         Whether to generate a section-wise feature summary
-  -o GROUP_ORDER [GROUP_ORDER ...], --group_order GROUP_ORDER [GROUP_ORDER ...]
+  -o, --group_order GROUP_ORDER [GROUP_ORDER ...]
                         Optional: Order of sections in the summary files
   -s, --generate_gene_sequences
                         Generate gene sequences in FASTA format

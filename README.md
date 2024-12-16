@@ -17,14 +17,18 @@ This script will automatically download and filter organellar and nuclear genome
 # basic code:
 python findGenome.py "group" "outfolder" --genome_type "chloroplast" --length_threshold INT --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
-# example:
-python findGenome.py "Ranunculus" ./plastomes_ranunculus --org_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species 2 --overwrite
+# examples:
+python findGenome5.py -g "ranunculaceae" -o ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
+
+python findGenome5.py -g "ranunculaceae" -o ./chloroplast_ranunculaceae --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+
+python findGenome5.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
 # usage:
 findGenome.py [-h] [--outfolfder OUTFOLDER] [--group GROUP]
-                             [--genome_type {chloroplast,mitochondrial,nuclear_genome}] [--batch_size BATCH_SIZE]
-                             [--duplicate_removal] [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
-                             [--overwrite] [--email EMAIL]
+                   [--genome_type {chloroplast,mitochondrial,nuclear_genome}] [--batch_size BATCH_SIZE]
+                   [--duplicate_removal] [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
+                   [--overwrite] [--email EMAIL]
 
 Download plastid, mitochondrial, or nuclear genomes from NCBI.
 

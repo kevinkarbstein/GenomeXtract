@@ -15,36 +15,32 @@ This script will automatically download and filter organellar and nuclear genome
 
 ```
 # basic code:
-python findGenome.py "group" "outfolder" --org_type "chloroplast" --length_threshold INT --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
+python findGenome.py "group" "outfolder" --genome_type "chloroplast" --length_threshold INT --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
 # example:
 python findGenome.py "Ranunculus" ./plastomes_ranunculus --org_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species 2 --overwrite
 
 # usage:
-findGenome.py [-h] [--length_threshold LENGTH_THRESHOLD] [--considered CONSIDERED]
-                             [--org_type {chloroplast,mitochondrial,nuclear_genome}] [--batch_size BATCH_SIZE]
-                             [--duplicate_removal] [--max_individuals_per_species MAX_INDIVIDUALS_PER_SPECIES]
-                             group outfolder
+findGenome.py [-h] [--outfolfder OUTFOLDER] [--group GROUP]
+                             [--genome_type {chloroplast,mitochondrial,nuclear_genome}] [--batch_size BATCH_SIZE]
+                             [--duplicate_removal] [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
+                             [--overwrite] [--email EMAIL]
 
 Download plastid, mitochondrial, or nuclear genomes from NCBI.
 
-positional arguments:
-  group                 The taxonomic group to search for (e.g., genus, family, order).
-  outfolder             The output folder where genomes will be saved.
-
 options:
-  -h, --help            show this help message and exit
-  --length_threshold LENGTH_THRESHOLD
-                        Minimum length of the genomes to be considered.
-  --considered CONSIDERED
-                        Specific genomes to consider.
-  --org_type {chloroplast,mitochondrial,nuclear_genome}
+  -h, --help            Show this help message and exit
+  -o, --outfolder       Output folder for downloaded files.
+  -g, --group           Taxonomic group or organism name (e.g., genus, family, order).
+  -t, --genome_type {chloroplast,mitochondrial,nuclear_genome}
                         The type of genome to download.
   --batch_size BATCH_SIZE
-                        Batch size for downloading genomes.
-  --max_individuals_per_species MAX_INDIVIDUALS_PER_SPECIES
-                        Maximum number of individuals per species to retain.
-  --duplicate_removal   Remove .gb files with duplicate sequences or based on max individuals per species.
+                        Batch size for downloading genomes (only organellar genomes).
+  --duplicate_removal   Remove duplicate sequence files (only for organellar genomes).
+  --max_individuals MAX_INDIVIDUALS_PER_SPECIES
+                        Maximum number of individuals per species to retain (only organellar genomes).
+  --overwrite           Overwrite existing output folder.
+  --email               Your email for NCBI Entrez queries.
 ```
 
 ### - assembleGenome.py

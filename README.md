@@ -54,11 +54,11 @@ This script requires Java 1.6 or later (for Astral).
 This script requires Python 3.6+ and the following libraries:
 pip install biopython
 
-**This script automatically extracts and compares features, and aligns and assembles annotated CDS regions from sequence files downloaded from NCBI**
+**These scripts automatically extract and compare features, and align and assemble sequences/annotated CDS regions from files downloaded from NCBI**
 
 ```
 # basic code:
-python assembleGenome.py -i INPUT -f FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r -t --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+python assembleGenome.py -i INPUT -f FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
 For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
@@ -90,7 +90,6 @@ options:
   -a, --align_sequences
                         Align gene sequences using MAFFT
   -r, --run_raxml       Run RAxML-NG for phylogenetic analysis
-  -t, --run_astral      Perform ASTRAL analysis on RAxML trees
   --select_group SELECT_GROUP
                         Limit gene extraction to a specific group
   --output_dir OUTPUT_DIR

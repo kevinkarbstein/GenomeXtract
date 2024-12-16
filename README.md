@@ -61,14 +61,14 @@ pip install biopython
 python assembleGenome.py -i INPUT -f FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenome4.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r -t --output_dir chloroplast_ranunculus/
+For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenome.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
 
-For a small test datasets, run: python findGenome5.py -g "ranunculales“ -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenome4.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r -t --output_dir mitogenome_ranunculales/
+For a small test datasets, run: python findGenome.py -g "ranunculales“ -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenome.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r --output_dir mitogenome_ranunculales/
 
 # usage:
-assembleGenome.py [-h] -i INPUT [FILE1.gb FILE2.gb ...] [-f FEATURE_SUMMARY] [-g] [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+assembleGenome.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [-f FEATURE_SUMMARY] [-g] [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
                        [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
                        [--output_dir OUTPUT_DIR]
                        [--select_group SELECT_GROUP]
@@ -96,6 +96,47 @@ options:
                         Output directory for gene sequences and alignment results
   --overwrite           Overwrite existing files if they exist
 ```
+
+
+
+```
+# basic code:
+python assembleGenes.py -i INPUT -s FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+
+# example:
+For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenes.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
+
+For a small test datasets, run: python findGenome.py -g "ranunculales“ -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleGenes.py -i mitogenome_ranunculales/*.gb -f ranunculales_features --group_feature_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -a -r --output_dir mitogenome_ranunculales/
+
+# usage:
+assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [--feature_section_summary]
+                       [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
+                       [--output_dir OUTPUT_DIR]
+                       [--select_group SELECT_GROUP]
+                       [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+                       [--overwrite]
+
+Process GenBank files and extract gene names and sequences.
+
+options:
+  -h, --help            show this help message and exit
+  -i, --input INPUT     Path to the GenBank files
+  -f, --feature_section_summary
+                        Generate section-wise feature summary
+  -g, --generate_gene_sequences
+                        Generate gene sequences in FASTA format
+  -a, --align_sequences
+                        Align gene sequences using MAFFT
+  -r, --run_raxml       Run RAxML-NG for phylogenetic analysis
+  -o, --output_dir OUTPUT_DIR
+                        Output directory for gene sequences and alignment results
+  --group_order GROUP_ORDER [GROUP_ORDER ...]
+                        Limit gene extraction to a specific group
+  --overwrite           Overwrite existing files if they exist
+```
+
 
 ### If you use any of the scripts, please cite the following reference until the journal article is published: 
 Karbstein et al. (2024), BioRxiv (https://doi.org/10.1101/2023.08.08.552429)

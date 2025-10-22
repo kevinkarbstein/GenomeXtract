@@ -135,4 +135,4 @@ options:
 
 
 ### If you use any of the scripts, please cite the following reference until the journal article is published: 
-Karbstein et al. (2024), BioRxiv (https://doi.org/10.1101/2023.08.08.552429)
+Karbstein K, Choudhary N, Xie T, Tomasello S, Wagner ND, Barke BH, Paetzold C, Bradican JP, Preick M, Himmelbach A, Stein N, Papantonis A, Irisarri I, de Vries J, Pucker B, Hörandl E. Assembling genomes of non-model plants: A case study with evolutionary insights from Ranunculus (Ranunculaceae). The Plant Journal, 2025; 00; e70390. https://doi.org/10.1111/tpj.70390

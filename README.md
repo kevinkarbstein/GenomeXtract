@@ -135,4 +135,4 @@ options:
 
 
 ### If you use any of the scripts, please cite the following reference: 
-**Karbstein K, Choudhary N, Xie T, Tomasello S, Wagner ND, Barke BH, Paetzold C, Bradican JP, Preick M, Himmelbach A, Stein N, Papantonis A, Irisarri I, de Vries J, Pucker B, Hörandl E**. Assembling genomes of non-model plants: A case study with evolutionary insights from Ranunculus (Ranunculaceae). The Plant Journal, 2025; 00; e70390. https://doi.org/10.1111/tpj.70390
+**Karbstein K, Choudhary N, Xie T, Tomasello S, Wagner ND, Barke BH, Paetzold C, Bradican JP, Preick M, Himmelbach A, Stein N, Papantonis A, Irisarri I, de Vries J, Pucker B, Hörandl E**. Assembling genomes of non-model plants: A case study with evolutionary insights from Ranunculus (Ranunculaceae). **The Plant Journal**, 2025; 00; e70390. https://doi.org/10.1111/tpj.70390

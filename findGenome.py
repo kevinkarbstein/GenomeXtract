@@ -230,7 +230,7 @@ def preview_nuclear_genome_size(group):
         logging.error(f"Failed to preview nuclear genome size: {str(e)}")
         return None
 
-def find_nuclear_genomes(group, outfolder, genome_type, annotated, level):
+def find_nuclear_genomes(group, outfolder, genome_type, annotated, assembly_level):
     """Search, download, and process genomes using NCBI Datasets API."""
     if genome_type == "nuclear_genome":
         logging.info(f"Handling 'nuclear' genome type for group '{group}'.")
@@ -255,7 +255,7 @@ def find_nuclear_genomes(group, outfolder, genome_type, annotated, level):
         command = f"""
         source ~/.zshrc &&
         conda activate ncbi_datasets &&
-        datasets download genome taxon "{group}" --include genome,gbff {annotated_arg} --assembly-level "{level}" --assembly-version latest --exclude-atypical --filename {zip_filename} &&
+        datasets download genome taxon "{group}" --include genome,gbff {annotated_arg} --assembly-level "{assembly_level}" --assembly-version latest --exclude-atypical --filename {zip_filename} &&
         conda deactivate
         """
 
@@ -320,7 +320,7 @@ def main():
             find_nuclear_genomes(
                 group=args.group,
                 annotated=args.annotated,
-                assembly_level=args.level,
+                assembly_level=args.assembly_level,
                 outfolder=args.outfolder,
                 genome_type=args.genome_type
             )

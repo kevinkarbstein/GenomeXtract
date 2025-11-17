@@ -300,7 +300,7 @@ def main():
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for downloaded files.")
     parser.add_argument('-t', '--genome_type', required=True, choices=['chloroplast', 'mitochondrial', 'nuclear_genome'], help="Type of genome to process.")
     parser.add_argument('--annotated', action='store_true', help="Select only annotated nuclear genomes.")
-    parser.add_argument('--assembly_level', required=True, help="Choose the assmbly level of the nuclear genome. Options: "contig", "scaffold", "chromosome", or "complete.")
+    parser.add_argument('--assembly_level', required=True, choices=['contig', 'scaffold', 'chromosome', 'complete'], help="Choose the assmbly level of the nuclear genome.")
     parser.add_argument("--batch_size", type=int, default=50, help="Batch size for downloading.")
     parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files. Prioritize NC_* or the latest release.")
     parser.add_argument('--max_individuals', type=int, help="Maximum individuals per species.")

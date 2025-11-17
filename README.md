@@ -42,8 +42,8 @@ options:
   -g, --group           Taxonomic group or organism name (STRING; e.g., the name of the genus, family, order).
   -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --batch_size          Batch size for downloading genomes (INT; only organellar genomes).
-  --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release.
-  --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes).
+  --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release(s).
+  --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes). Prioritize NC_* the latest release(s).
   --overwrite           Overwrite existing output folder.
   --email               Your email for NCBI Entrez queries.
 ```

@@ -1,8 +1,8 @@
-# Tools for Finding, Comparing, and Assembling NCBI-Genomes
+# Find, Compare, and Assembly NCBI-Genomes
 Automatically download, compare, and assemble genomes from NCBI
 
 
-### - findGenome.py (version 5)
+### - findGenome.py
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:

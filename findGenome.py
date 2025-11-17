@@ -230,7 +230,7 @@ def preview_nuclear_genome_size(group):
         logging.error(f"Failed to preview nuclear genome size: {str(e)}")
         return None
 
-def find_nuclear_genomes(group, outfolder, genome_type):
+def find_nuclear_genomes(group, outfolder, genome_type, annotated, level):
     """Search, download, and process genomes using NCBI Datasets API."""
     if genome_type == "nuclear_genome":
         logging.info(f"Handling 'nuclear' genome type for group '{group}'.")
@@ -247,12 +247,15 @@ def find_nuclear_genomes(group, outfolder, genome_type):
         # Handle nuclear genomes
         genomes_folder = os.path.join(outfolder, f"{genome_type}s")
         os.makedirs(genomes_folder, exist_ok=True)
-            
+        
+        # Select annotated nuclear genomes
+        annotated_arg = "--annotated" if annotated else ""
+
         zip_filename = os.path.join(outfolder, f"{group}_nuclear_genome.zip")
         command = f"""
         source ~/.zshrc &&
         conda activate ncbi_datasets &&
-        datasets download genome taxon "{group}" --include genome,gbff --annotated --assembly-level "chromosome" --assembly-version latest --exclude-atypical --filename {zip_filename} &&
+        datasets download genome taxon "{group}" --include genome,gbff {annotated_arg} --assembly-level "{level}" --assembly-version latest --exclude-atypical --filename {zip_filename} &&
         conda deactivate
         """
 
@@ -296,6 +299,8 @@ def main():
     parser.add_argument('-g', '--group', required=True, help="Taxonomic group or organism name.")
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for downloaded files.")
     parser.add_argument('-t', '--genome_type', required=True, choices=['chloroplast', 'mitochondrial', 'nuclear_genome'], help="Type of genome to process.")
+    parser.add_argument('--annotated', action='store_true', help="Select only annotated nuclear genomes.")
+    parser.add_argument('--assembly_level', required=True, help="Choose the assmbly level of the nuclear genome. Options: "contig", "scaffold", "chromosome", or "complete".)
     parser.add_argument("--batch_size", type=int, default=50, help="Batch size for downloading.")
     parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files. Prioritize NC_* or the latest release.")
     parser.add_argument('--max_individuals', type=int, help="Maximum individuals per species.")
@@ -314,6 +319,8 @@ def main():
         if args.genome_type == "nuclear_genome":
             find_nuclear_genomes(
                 group=args.group,
+                annotated=args.annotated
+                assembly_level=args.level
                 outfolder=args.outfolder,
                 genome_type=args.genome_type
             )

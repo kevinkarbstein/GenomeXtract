@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in public databases. 
+This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in the public NCBI database. 
 
 License:
     Copyright 2025 Kevin Karbstein
@@ -22,11 +22,12 @@ import os
 import logging
 import zipfile
 import json
+import math
 import shutil
 import subprocess
 from argparse import ArgumentParser
 from Bio import Entrez, SeqIO
-import math
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -161,7 +162,7 @@ def find_full_organelle_genome(group, outfolder, genome_type, duplicate_removal,
     if genome_type == 'chloroplast':
         term += ' AND chloroplast'
     elif genome_type == 'mitochondrial':
-        term += ' AND mitochondrial'
+        term += ' AND mitochondrion[Title]'
     else:
         logging.error(f"Unsupported genome type: {genome_type}")
         raise ValueError("Invalid genome_type. Use 'chloroplast', 'mitochondrial', or 'nuclear'.")
@@ -299,9 +300,9 @@ def main():
     parser.add_argument('-g', '--group', required=True, help="Taxonomic group or organism name.")
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for downloaded files.")
     parser.add_argument('-t', '--genome_type', required=True, choices=['chloroplast', 'mitochondrial', 'nuclear_genome'], help="Type of genome to process.")
-    parser.add_argument('--annotated', action='store_true', help="Select only annotated nuclear genomes.")
-    parser.add_argument('--assembly_level', required=True, choices=['scaffold', 'chromosome'], help="Choose the assmbly level of the nuclear genome.")
-    parser.add_argument('--batch_size', type=int, default=50, help="Batch size for downloading.")
+    parser.add_argument('--annotated', action='store_true', help="Select only gene-annotated nuclear genomes.")
+    parser.add_argument('--assembly_level', required=False, choices=['scaffold', 'chromosome'], help="Choose the assmbly level of the nuclear genome.")
+    parser.add_argument("--batch_size", type=int, default=50, help="Batch size for downloading.")
     parser.add_argument('--duplicate_removal', action='store_true', help="Remove duplicate files. Prioritize NC_* or the latest release.")
     parser.add_argument('--max_individuals', type=int, help="Maximum individuals per species.")
     parser.add_argument('--overwrite', action='store_true', help="Overwrite existing output folder.")

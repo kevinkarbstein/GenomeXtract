@@ -20,29 +20,30 @@ python findGenome.py "group" "outfolder" --genome_type "chloroplast" --length_th
 # examples:
 python findGenome.py -g "ranunculaceae" -o ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
-python findGenome.py -g "ranunculaceae" -o ./chloroplast_ranunculaceae --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 python findGenome.py -g "ranunculaceae" -o ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 # usage:
-findGenome.py [-h] [--outfolfder OUTFOLDER] [--group GROUP]
-                   [--genome_type {chloroplast,mitochondrial,nuclear_genome}] [--batch_size BATCH_SIZE]
-                   [--duplicate_removal] [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
-                   [--overwrite] [--email EMAIL]
+findGenome.py [-h] [--outfolfder OUTFOLDER]
+                   [--group GROUP]
+                   [--genome_type {chloroplast,mitochondrial,nuclear_genome}]
+                   [--batch_size BATCH_SIZE]
+                   [--duplicate_removal]
+                   [--max_individuals MAX_INDIVIDUALS_PER_SPECIES]
+                   [--overwrite]
+                   [--email EMAIL]
 
 Download plastid, mitochondrial, or nuclear genomes from NCBI.
 
 options:
   -h, --help            Show this help message and exit
-  -o, --outfolder       Output folder for downloaded files.
-  -g, --group           Taxonomic group or organism name (e.g., genus, family, order).
-  -t, --genome_type {chloroplast,mitochondrial,nuclear_genome}
-                        The type of genome to download.
-  --batch_size BATCH_SIZE
-                        Batch size for downloading genomes (only organellar genomes).
+  -o, --outfolder       Output folder for downloaded files (STRING).
+  -g, --group           Taxonomic group or organism name (STRING; e.g., the name of the genus, family, order).
+  -t, --genome_type     The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
+  --batch_size          Batch size for downloading genomes (INT; only organellar genomes).
   --duplicate_removal   Remove duplicate sequence files (only for organellar genomes). Prioritize NC_* or the latest release.
-  --max_individuals MAX_INDIVIDUALS_PER_SPECIES
-                        Maximum number of individuals per species to retain (only organellar genomes).
+  --max_individuals     Maximum number of individuals per species to retain (INT; only organellar genomes).
   --overwrite           Overwrite existing output folder.
   --email               Your email for NCBI Entrez queries.
 ```
@@ -65,8 +66,14 @@ For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloro
 python assembleGenome.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
 
 # usage:
-assembleGenome.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [-f FEATURE_SUMMARY] [-g] [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
-                       [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
+assembleGenome.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
+                       [-f FEATURE_SUMMARY]
+                       [-g]
+                       [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+                       [--generate_gene_sequences]
+                       [--align_sequences]
+                       [--run_raxml]
+                       [--run_astral]
                        [--output_dir OUTPUT_DIR]
                        [--select_group SELECT_GROUP]
                        [--overwrite]
@@ -108,11 +115,16 @@ For a small test datasets, run: python findGenome5.py -g "ranunculales" -o ./mit
 python assembleGenes.py -i mitogenome_ranunculales/*.gb -o ranunculales_gene_features —feeature_section_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -g -a -r -x
 
 # usage:
-assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...] [-o GROUP_ORDER [GROUP1 GROUP2 ...]] [--feature_section_summary]
-                       [--generate_gene_sequences] [--align_sequences] [--run_raxml] [--run_astral]
-                       [--output_dir OUTPUT_DIR]
-                       [--select_group SELECT_GROUP]
-                       [--overwrite]
+assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
+                 [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+                 [--feature_section_summary]
+                 [--generate_gene_sequences]
+                 [--align_sequences]
+                 [--run_raxml]
+                 [--run_astral]
+                 [--output_dir OUTPUT_DIR]
+                 [--select_group SELECT_GROUP]
+                 [--overwrite]
 
 Process GenBank files and extract gene names and sequences.
 

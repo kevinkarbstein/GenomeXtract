@@ -171,10 +171,10 @@ def find_full_organelle_genome(group, outfolder, genome_type, duplicate_removal,
         estimated_size_gb = estimate_organellar_genome_size(term=term, retmax=100000, db=db)
         logging.info(f"Estimated download size: {estimated_size_gb:.2f} GB")
         
-        user_input = input(f"Do you want to proceed? Estimated size: {estimated_size_gb:.2f} GB (yes/no): ").strip().lower()
-        if user_input != 'yes':
-            logging.info("Download canceled by user.")
-            return
+        #user_input = input(f"Do you want to proceed? Estimated size: {estimated_size_gb:.2f} GB (yes/no): ").strip().lower()
+        #if user_input != 'yes':
+            #logging.info("Download canceled by user.")
+            #return
 
         # Fetch genome IDs and batches
         ids, num_batches = fetch_genome_ids(term=term, retmax=100000, batch_size=50, db=db)
@@ -239,10 +239,10 @@ def find_nuclear_genomes(group, outfolder, genome_type):
         estimated_size_gb = preview_nuclear_genome_size(group=group)
         if estimated_size_gb:
             logging.info(f"Estimated size of the single (compressed) nuclear genome fasta file: {estimated_size_gb:.2f} GB")
-            user_input = input(f"Do you want to proceed? Estimated size: {estimated_size_gb:.2f} GB (yes/no): ").strip().lower()
-            if user_input != 'yes':
-                logging.info("Download canceled by user.")
-                return
+            #user_input = input(f"Do you want to proceed? Estimated size: {estimated_size_gb:.2f} GB (yes/no): ").strip().lower()
+            #if user_input != 'yes':
+                #logging.info("Download canceled by user.")
+                #return
 
         # Handle nuclear genomes
         genomes_folder = os.path.join(outfolder, f"{genome_type}s")

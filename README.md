@@ -3,23 +3,19 @@ Automatically download, compare, and assemble genomes from NCBI
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
-
+```
 conda install python=3.10 
-
 pip install biopython
-
 pip install pandas
+```
 
 Install the NCBI Datasets CLI for handling nuclear genomes:
-
+```
 conda install -c bioconda ncbi-datasets-cli
-
 conda install bioconda::raxml-ng # v1.2.2
-
 conda install bioconda::iqtree # v3.0.1
-
 conda install bioconda::mafft # v7.525
-
+```
 
 ### - findGenome.py
 

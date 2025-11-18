@@ -98,9 +98,8 @@ options:
   --email               Your email for NCBI Entrez queries (STRING).
 ```
 
-### - assembleGenome.py / assembleGenes.py
-
-**These scripts automatically extract and compare features, and align and assemble sequences/annotated CDS regions from files downloaded from NCBI**
+### - assembleOrgGenome.py
+**This script automatically extracts and compares gene features, and aligns genome sequences from files downloaded from NCBI**
 
 ```
 # basic code:
@@ -147,11 +146,12 @@ options:
   --overwrite               Overwrite existing files if they exist
 ```
 
-
+### - assembleOrgGenes.py
+**This script automatically extracts and compares gene features, and aligns gene sequences from files downloaded from NCBI**
 
 ```
 # basic code:
-python assembleGenes.py --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
+python assembleOrgGenes.py --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
 
 # example:
 For a small test datasets, run: python findGenome.py --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX

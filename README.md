@@ -1,17 +1,27 @@
 # Find, Compare, and Assembly NCBI-Genomes
 Automatically download, compare, and assemble genomes from NCBI
 
-
-### - findGenome.py
-
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
 
+conda install python=3.10 
+
 pip install biopython
+
+pip install pandas
 
 Install the NCBI Datasets CLI for handling nuclear genomes:
 
 conda install -c bioconda ncbi-datasets-cli
+
+conda install bioconda::raxml-ng # v1.2.2
+
+conda install bioconda::iqtree # v3.0.1
+
+conda install bioconda::mafft # v7.525
+
+
+### - findGenome.py
 
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
 
@@ -56,15 +66,6 @@ options:
 
 ### - findClosestGenome.py
 
-**Dependencies**
-This script requires Python 3.6+ and the following libraries:
-
-pip install biopython
-
-Install the NCBI Datasets CLI for handling nuclear genomes:
-
-conda install -c bioconda ncbi-datasets-cli
-
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
 
 ```
@@ -102,30 +103,19 @@ options:
 
 ### - assembleGenome.py / assembleGenes.py
 
-**Dependencies**
-This script requires Java 1.6 or later (for Astral).
-
-This script requires Python 3.6+ and the following libraries:
-pip install biopython
-
-Install RAxML_NG/iqtree for phylogenetic tree inference:
-
-conda install bioconda::raxml-ng # v1.2.2
-
-conda install bioconda::iqtree # v3.0.1
-
 **These scripts automatically extract and compare features, and align and assemble sequences/annotated CDS regions from files downloaded from NCBI**
 
 ```
 # basic code:
-python assembleGenome.py -i INPUT -f FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+python assembleGenome.py -i INPUT --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-For a small test datasets, run: python findGenome.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenome.py -i chloroplast_ranunculus/*.gb -f ranunculus_features -s -a -r --output_dir chloroplast_ranunculus/
+For a small test datasets, run: python findGenome.py --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/
+python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/
 
 # usage:
-assembleGenome.py [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
+assembleOrgGenome.py [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
                        [--feature_summary FEATURE_SUMMARY]
                        [--group_feature_summary]
                        [--group_order GROUP_ORDER [GROUP1 GROUP2 ...]]
@@ -151,7 +141,7 @@ options:
   --align_sequences         Align gene sequences using MAFFT
   --run_raxml               Run RAxML-NG for phylogenetic analysis
   --raxml_model             RAxML-NG model to use (STRING; default: GTR+G)
-  --bootstrap_replicates    Number of bootstrap replicates for RAxML-NG (default: 100)
+  --bootstrap_replicates    Number of bootstrap replicates for RAxML-NG (INT; default: 100)
   --run_iqtree              Run IQ-TREE for phylogenetic analysis
   --select_group            Limit gene extraction to a specific group (STRING)  
   --output_dir              Output directory for gene sequences and alignment results (STRING)

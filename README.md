@@ -5,12 +5,12 @@ Automatically download, compare, and assemble genomes from NCBI
 This script requires Python 3.6+ and the following libraries:
 ```
 conda install python=3.10 
+
 pip install biopython
 pip install pandas
-```
+pip install requests
+pip install openpyxl
 
-Install the NCBI Datasets CLI for handling nuclear genomes:
-```
 conda install -c bioconda ncbi-datasets-cli
 conda install bioconda::raxml-ng # v1.2.2
 conda install bioconda::iqtree # v3.0.1
@@ -107,8 +107,10 @@ python assembleGenome.py -i INPUT --feature_summary FEATURE_SUMMARY --feature_su
 
 # example:
 For a small test datasets, run: python findGenome.py --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/
-python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/
+
+python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
+
+python assembleOrgGenome.py -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/ --overwrite
 
 # usage:
 assembleOrgGenome.py [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
@@ -155,6 +157,7 @@ For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chlor
 python assembleGenes.py -i chloroplast_ranunculus/*.gb -o ranunculus_gene_features -s -g -a -r -x 
 
 For a small test datasets, run: python findGenome5.py -g "ranunculales" -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+
 python assembleGenes.py -i mitogenome_ranunculales/*.gb -o ranunculales_gene_features —feeature_section_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -g -a -r -x
 
 # usage:

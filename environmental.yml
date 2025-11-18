@@ -17,3 +17,4 @@ dependencies:
   - pip
   - pip:
       - genomextract  # optional: once your package is on pip/conda
+      - pytest

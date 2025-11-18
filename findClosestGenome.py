@@ -55,7 +55,6 @@ def setup_folder(outfolder, overwrite):
 # ---------------------------------------------------------
 
 def get_taxid_and_rank(taxon_name, email):
-    """Return (rank, taxid) for a taxon name."""
     Entrez.email = email
     h = Entrez.esearch(db="taxonomy", term=taxon_name)
     rec = Entrez.read(h)
@@ -74,7 +73,6 @@ def get_taxid_and_rank(taxon_name, email):
 
 
 def get_lineage(taxid, email):
-    """Return lineage including self (name, taxid)."""
     Entrez.email = email
     h = Entrez.efetch(db="taxonomy", id=taxid, retmode="xml")
     rec = Entrez.read(h)[0]
@@ -86,72 +84,102 @@ def get_lineage(taxid, email):
 
 
 # ---------------------------------------------------------
-# Nuclear genomes via NCBI Datasets
+# Nuclear genomes (datasets) — UPDATED WITH OPTION A
 # ---------------------------------------------------------
 
-def nuclear_genomes_exist(taxon, annotated=False, assembly_level=None):
-    """Return True if nuclear genome assemblies exist for taxon."""
-    level = assembly_level if assembly_level else "all"
+def run_datasets_summary_nuclear(taxid, include_lineage=False):
+    """Run datasets summary genome for nuclear genomes, optionally including lineage."""
 
-    cmd = (
-        f'source ~/.zshrc && conda activate ncbi_datasets && '
-        f'datasets summary genome taxon "{taxon}" '
-        f'--assembly-level "{level}" --assembly-version latest '
-        f'--exclude-atypical --as-json-lines && conda deactivate'
-    )
-
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-
-    if result.returncode != 0:
-        return False
-
-    assemblies = []
-    for line in result.stdout.strip().split("\n"):
-        if not line:
-            continue
-        try:
-            assemblies.append(json.loads(line))
-        except:
-            continue
-
-    if annotated:
-        assemblies = [a for a in assemblies if a.get("annotation") == "ANNOTATED"]
-
-    return len(assemblies) > 0
-
-
-def list_taxon_nuclear_genomes(taxid, annotated=False, assembly_level=None):
-    """List all nuclear genomes for ANY descendant of a taxid."""
-    level = assembly_level if assembly_level else "all"
 
     cmd = (
         f'source ~/.zshrc && conda activate ncbi_datasets && '
         f'datasets summary genome taxon {taxid} '
-        f'--assembly-level "{level}" --assembly-version latest '
-        f'--exclude-atypical --as-json-lines && conda deactivate'
+        f'--assembly-version latest --exclude-atypical --as-json-lines && conda deactivate'
     )
 
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+
     if result.returncode != 0:
+        logging.warning(f"datasets command failed:\n{result.stderr}")
         return []
 
-    species = set()
-
+    # Return list of decoded JSON objects
+    json_records = []
     for line in result.stdout.strip().split("\n"):
-        if not line:
+        if not line.strip():
             continue
         try:
-            js = json.loads(line)
-            org = js.get("organism", {}).get("organism_name", None)
-            if not org:
-                continue
-            if annotated and js.get("annotation") != "ANNOTATED":
-                continue
-            species.add(org)
-        except:
+            json_records.append(json.loads(line))
+        except json.JSONDecodeError:
+            logging.warning(f"Skipping invalid JSON line:\n{line}")
+
+    #print(json_records)
+    return json_records
+
+
+def parse_nuclear_json(json_records, annotated=False, assembly_level=None):
+    """
+    Convert datasets JSONL records to a dict:
+    { species_name: [ {metadata_dict}, {metadata_dict}, ... ] }
+    """
+    species_accessions = {}
+
+    for js in json_records:
+
+        # Required basic fields
+        accession = js.get("accession")
+        org_name = js.get("organism", {}).get("organism_name")
+
+        if not accession or not org_name:
             continue
 
-    return sorted(species)
+        asm = js.get("assembly_info", {})
+        ann = js.get("annotation_info", {})
+
+        # Filters
+        asm_level = asm.get("assembly_level", "").lower()
+        if assembly_level and asm_level != assembly_level.lower():
+            continue
+
+        annotation_available = bool(ann)
+        if annotated and not annotation_available:
+            continue
+
+        # Extract meaningful metadata
+        metadata = {
+            "species": org_name,
+            "accession": accession,
+            "assembly_name": asm.get("assembly_name", ""),
+            "assembly_level": asm.get("assembly_level", ""),
+            "assembly_method": asm.get("assembly_method", ""),
+            "assembly_date": asm.get("submission_date", ""),
+            "bioproject": asm.get("bioproject_accession", ""),
+            "biosample": asm.get("biosample_accession", ""),
+            "representation": asm.get("representation", ""),
+            "chromosomes": asm.get("chromosomes", ""),
+            "n50": asm.get("contig_n50", ""),
+            "annotation_available": "yes" if annotation_available else "no",
+            "provider": ann.get("provider", "") if annotation_available else "",
+        }
+
+        species_accessions.setdefault(org_name, []).append(metadata)
+
+    return species_accessions
+
+
+def list_taxon_nuclear_genomes(taxid, rank, annotated=False, assembly_level=None):
+    """
+    Option A logic:
+    - If rank == species → no lineage
+    - If rank != species → include lineage
+    """
+    include_lineage = (rank != "species")
+
+    json_records = run_datasets_summary_nuclear(
+        taxid,
+        include_lineage=include_lineage
+    )
+    return parse_nuclear_json(json_records, annotated, assembly_level)
 
 
 # ---------------------------------------------------------
@@ -159,9 +187,7 @@ def list_taxon_nuclear_genomes(taxid, annotated=False, assembly_level=None):
 # ---------------------------------------------------------
 
 def build_entrez_term_taxid(taxid, genome_type):
-    """Taxon-expanded search using txidXXXX[Organism:exp]."""
     term = f"(txid{taxid}[Organism:exp]) AND \"complete genome\""
-
     if genome_type == "chloroplast":
         term += " AND chloroplast"
     elif genome_type == "mitochondrial":
@@ -170,7 +196,6 @@ def build_entrez_term_taxid(taxid, genome_type):
         term += " AND genomic DNA[filter]"
     else:
         raise ValueError(f"Invalid genome_type: {genome_type}")
-
     return term
 
 
@@ -184,23 +209,24 @@ def list_entire_taxon_genomes(taxid, genome_type, email):
     h.close()
 
     if not ids:
-        return []
+        return {}
 
     h2 = Entrez.efetch(db="nucleotide", id=ids, retmode="xml")
     recs = Entrez.read(h2)
     h2.close()
 
-    species = set()
+    species_accessions = {}
     for rec in recs:
         org = rec.get("GBSeq_organism")
-        if org:
-            species.add(org)
+        acc = rec.get("GBSeq_primary-accession")
+        if org and acc:
+            species_accessions.setdefault(org, []).append(acc)
 
-    return sorted(species)
+    return species_accessions
 
 
 # ---------------------------------------------------------
-# Nearest-species logic (species input only)
+# Nearest species search (species input only)
 # ---------------------------------------------------------
 
 def nearest_species_with_genome(taxon_name, genome_type, email, annotated=False, assembly_level=None):
@@ -211,9 +237,7 @@ def nearest_species_with_genome(taxon_name, genome_type, email, annotated=False,
     lineage = get_lineage(taxid, email)
 
     for name, _tid in reversed(lineage):
-
         if genome_type in ["chloroplast", "mitochondrial"]:
-            # Organellar genomes via Entrez
             term = f"\"{name}\"[Organism] AND \"complete genome\""
             if genome_type == "chloroplast":
                 term += " AND chloroplast"
@@ -230,11 +254,15 @@ def nearest_species_with_genome(taxon_name, genome_type, email, annotated=False,
                 h2.close()
 
                 for rec in recs:
-                    return rec["GBSeq_organism"]
+                    acc = rec.get("GBSeq_primary-accession")
+                    if acc:
+                        return {rec["GBSeq_organism"]: [acc]}
 
-        else:  # nuclear
-            if nuclear_genomes_exist(name, annotated, assembly_level):
-                return name
+        else:  # nuclear → must use datasets
+            r, t = get_taxid_and_rank(name, email)
+            sp_dict = list_taxon_nuclear_genomes(t, r, annotated, assembly_level)
+            if sp_dict:
+                return sp_dict
 
     return None
 
@@ -244,7 +272,7 @@ def nearest_species_with_genome(taxon_name, genome_type, email, annotated=False,
 # ---------------------------------------------------------
 
 def main():
-    parser = ArgumentParser(description="Find the closest available reference genomes(s) of a given taxon in NCBI.")
+    parser = ArgumentParser(description="Find the closest available reference genome(s) of a given taxon in NCBI.")
     parser.add_argument('-g', '--taxon', required=True, help="Species or higher-level taxon name (e.g., Genus or Family).")
     parser.add_argument('-o', '--outfolder', required=True, help="Output folder for the result file.")
     parser.add_argument('-t', '--genome_type', required=True,
@@ -262,57 +290,111 @@ def main():
     setup_folder(args.outfolder, args.overwrite)
 
     rank, taxid = get_taxid_and_rank(args.taxon, args.email)
-
     if not taxid:
         logging.error("Taxon not found in NCBI.")
         return
 
     logging.info(f"Taxon '{args.taxon}' is rank '{rank}', taxid={taxid}")
+    # Sanitize taxon name for filesystem (replace spaces with underscores)
+    taxon_clean = args.taxon.replace(" ", "_")
 
-    #
-    # CASE 1: species → nearest-species behavior
-    #
+    # Build output file path
+    out = os.path.join(args.outfolder, f"{taxon_clean}_{args.genome_type}.tsv")
+
+
+    # ------------------------
+    # Species-level search
+    # ------------------------
     if rank == "species":
         logging.info("Species rank detected → using nearest-species search.")
-
-        species = nearest_species_with_genome(
+        species_dict = nearest_species_with_genome(
             args.taxon,
             args.genome_type,
             args.email,
             args.annotated,
             args.assembly_level
         )
-
-        out = os.path.join(args.outfolder, "result.txt")
-
-        if species:
-            logging.info(f"Nearest species with a {args.genome_type}: {species}")
+        if species_dict:
             with open(out, "w") as f:
-                f.write(species + "\n")
+                headers = [
+                    "Species", "Accession", "Assembly_Name", "Assembly_Level",
+                    "Assembly_Method", "Assembly_Date", "Provider",
+                    "Bioproject", "Biosample", "Annotated",
+                    "Representation", "N50", "Chromosomes"
+                ]
+                f.write("\t".join(headers) + "\n")
+
+                for sp, entries in species_dict.items():
+                    for md in entries:
+                        row = [
+                            md.get("species", ""),
+                            md.get("accession", ""),
+                            md.get("assembly_name", ""),
+                            md.get("assembly_level", ""),
+                            md.get("assembly_method", ""),
+                            md.get("assembly_date", ""),
+                            md.get("provider", ""),
+                            md.get("bioproject", ""),
+                            md.get("biosample", ""),
+                            md.get("annotation_available", ""),
+                            md.get("representation", ""),
+                            str(md.get("n50", "")),
+                            str(md.get("chromosomes", ""))
+                        ]
+                        f.write("\t".join(row) + "\n")
+
+            logging.info(f"Nearest species with a {args.genome_type} saved to {out}")
         else:
             logging.warning("No genome found in the lineage.")
         return
-
-    #
-    # CASE 2: higher taxon → list all descendant species
-    #
+    # ------------------------
+    # Higher-level taxon search
+    # ------------------------
     logging.info("Higher taxon detected → listing all descendant species with genomes.")
 
     if args.genome_type in ["chloroplast", "mitochondrial"]:
-        species_list = list_entire_taxon_genomes(
-            taxid, args.genome_type, args.email
-        )
+        species_dict = list_entire_taxon_genomes(taxid, args.genome_type, args.email)
     else:
-        species_list = list_taxon_nuclear_genomes(
-            taxid, args.annotated, args.assembly_level
+        species_dict = list_taxon_nuclear_genomes(
+            taxid,
+            rank,
+            args.annotated,
+            args.assembly_level
         )
 
-    out = os.path.join(args.outfolder, "available_species.txt")
-    with open(out, "w") as f:
-        f.write("\n".join(species_list))
+    if species_dict:
+        with open(out, "w") as f:
+            headers = [
+                "Species", "Accession", "Assembly_Name", "Assembly_Level",
+                "Assembly_Method", "Assembly_Date", "Provider",
+                "Bioproject", "Biosample", "Annotated",
+                "Representation", "N50", "Chromosomes"
+            ]
+            f.write("\t".join(headers) + "\n")
 
-    logging.info(f"Found {len(species_list)} species.")
-    logging.info(f"Saved list to {out}.")
+            for sp, entries in species_dict.items():
+                for md in entries:
+                    row = [
+                        md.get("species", ""),
+                        md.get("accession", ""),
+                        md.get("assembly_name", ""),
+                        md.get("assembly_level", ""),
+                        md.get("assembly_method", ""),
+                        md.get("assembly_date", ""),
+                        md.get("provider", ""),
+                        md.get("bioproject", ""),
+                        md.get("biosample", ""),
+                        md.get("annotation_available", ""),
+                        md.get("representation", ""),
+                        str(md.get("n50", "")),
+                        str(md.get("chromosomes", ""))
+                    ]
+                    f.write("\t".join(row) + "\n")
+
+        logging.info(f"Found {len(species_dict)} species.")
+        logging.info(f"Saved list to {out}.")
+    else:
+        logging.warning("No genomes found for the given taxon.")
 
 
 if __name__ == "__main__":

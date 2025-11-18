@@ -1,5 +1,5 @@
-# Find, Compare, and Assembly NCBI-Genomes
-Automatically download, compare, and assemble genomes from NCBI
+# Felix – A Toolkit to Easily Find, Compare, and Assemble NCBI Genomes
+Automatically download, compare, and assemble genomes from NCBI – saving you time, avoiding frustration, and keeping genomics fun.
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
@@ -15,6 +15,7 @@ conda install -c bioconda ncbi-datasets-cli
 conda install bioconda::raxml-ng # v1.2.2
 conda install bioconda::iqtree # v3.0.1
 conda install bioconda::mafft # v7.525
+conda install bioconda::astral-tree # v5.7.8
 ```
 
 ### - findGenome.py
@@ -132,7 +133,7 @@ Process GenBank files and extract gene names and sequences.
 options:
   -h, --help                show this help message and exit
   --input INPUT             Path to the GenBank files (STRING)
-  --feature_summary         Folder name for feature summary files (STRING)                  
+  --feature_summary         File name for feature summary CSV and XLSX files (STRING)                  
   --group_feature_summary   Whether to generate a section-wise feature summary               
   --group_order             Order of sections in the summary files (STRING)          
   --generate_gene_sequences Generate gene sequences in FASTA format       
@@ -150,45 +151,43 @@ options:
 
 ```
 # basic code:
-python assembleGenes.py -i INPUT -s FEATURE_SUMMARY -g --group_order GROUP_ORDER -s -a -r --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+python assembleGenes.py --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
 
 # example:
-For a small test datasets, run: python findGenome5.py -g "ranunculus" -o ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
-python assembleGenes.py -i chloroplast_ranunculus/*.gb -o ranunculus_gene_features -s -g -a -r -x 
+For a small test datasets, run: python findGenome.py --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-For a small test datasets, run: python findGenome5.py -g "ranunculales" -o ./mitogenome_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+python assembleOrgGenes.py --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
-python assembleGenes.py -i mitogenome_ranunculales/*.gb -o ranunculales_gene_features —feeature_section_summary -o Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae -s -g -a -r -x
+For a bigger test dataset, run: python findGenome.py --group "ranunculales" --outfolder ./chloroplast_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+
+python assembleOrgGenes.py --input mitogenome_ranunculales/*.gb --output_dir ranunculales_mitogene_features —-feature_section_summary --group_order Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
 # usage:
-assembleGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
-                 [-o GROUP_ORDER [GROUP1 GROUP2 ...]]
+assembleOrgGenes.py [-h] --input INPUT [FILE1.gb FILE2.gb ...]
+                 [--group_order [GROUP1 GROUP2 ...]]
                  [--feature_section_summary]
-                 [--generate_gene_sequences]
+                 [--gene_sequences]
                  [--align_sequences]
                  [--run_raxml]
                  [--run_astral]
                  [--output_dir OUTPUT_DIR]
-                 [--select_group SELECT_GROUP]
                  [--overwrite]
 
 Process GenBank files and extract gene names and sequences.
 
 options:
   -h, --help            show this help message and exit
-  -i, --input INPUT     Path to the GenBank files
-  -f, --feature_section_summary
-                        Generate section-wise feature summary
+  --input INPUT     Path to the GenBank files
   --group_order GROUP_ORDER [GROUP_ORDER ...]
                         Limit gene extraction to a specific group
-  -g, --generate_gene_sequences
-                        Generate gene sequences in FASTA format
-  -a, --align_sequences
-                        Align gene sequences using MAFFT
-  -r, --run_raxml       Run RAxML-NG for phylogenetic analysis
-  -o, --output_dir OUTPUT_DIR
-                        Output directory for gene sequences and alignment results
-  --overwrite           Overwrite existing files if they exist
+  --feature_section_summary   Generate section-wise feature summary
+                        
+  --gene_sequences            Generate gene sequences in FASTA format
+  --align_sequences           Align gene sequences using MAFFT
+  --run_raxml                 Run RAxML-NG for gene-tree calculations
+  --run_astral                Run Astral for coalescent-based phylogenetic tree inference
+  --output_dir OUTPUT_DIR     Output directory for gene sequences and alignment results              
+  --overwrite                 Overwrite existing files if they exist
 ```
 
 

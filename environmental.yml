@@ -1,0 +1,19 @@
+name: ncbi-genome-tools
+channels:
+  - bioconda
+  - conda-forge
+
+dependencies:
+  - python=3.10
+  - biopython
+  - pandas
+  - requests
+  - openpyxl
+  - ncbi-datasets-cli
+  - raxml-ng=1.2.2
+  - iqtree=3.0.1
+  - mafft=7.525
+  - astral-tree=5.7.8
+  - pip
+  - pip:
+      - ncbi-genome-tools  # optional: once your package is on pip/conda

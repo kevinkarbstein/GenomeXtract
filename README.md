@@ -1,5 +1,5 @@
 # Felix – A Toolkit to Easily Find, Compare, and Assemble NCBI Genomes
-Automatically download, compare, and assemble genomes from NCBI – saving you time, avoiding frustration, and keeping genomics fun.
+Automatically download, compare, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:

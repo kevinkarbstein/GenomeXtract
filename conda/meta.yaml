@@ -1,0 +1,42 @@
+package:
+  name: ncbi-genome-tools
+  version: "0.1.0"
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install ."
+
+requirements:
+  host:
+    - python =3.10
+    - pip
+    - biopython
+    - pandas
+    - requests
+    - openpyxl
+
+  run:
+    - python =3.10
+    - biopython
+    - pandas
+    - requests
+    - openpyxl
+
+    # External tools from bioconda
+    - ncbi-datasets-cli ==18.9.0    # 18.9.0
+    - raxml-ng ==1.2.2              # v1.2.2
+    - iqtree ==3.0.1                # v3.0.1
+    - mafft ==7.525                 # v7.525
+    - astral-tree ==5.7.8           # v5.7.8
+
+about:
+  home: "https://github.com/KK260/NCBI-Genome-Tools"
+  summary: "Utilities for downloading, assembling, and analyzing NCBI genomes."
+  license: MIT
+
+extra:
+  recipe-maintainers:
+    - KK260

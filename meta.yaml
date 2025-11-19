@@ -3,7 +3,7 @@ package:
   version: "0.1.0"
 
 source:
-  git_url: https://github.com/KK260/NCBI-Genome-Tools.git
+  git_url: https://github.com/KK260/GenomeXtract.git
   git_tag: "v0.1.0"   # match your release tag
 
 build:
@@ -38,7 +38,7 @@ test:
     - assembleOrgGenes --help
 
 about:
-  home: "https://github.com/KK260/NCBI-Genome-Tools"
+  home: "https://github.com/KK260/GenomeXtract"
   license: MIT
   summary: "A toolkit for downloading, assembling, and analyzing NCBI genomes."
 

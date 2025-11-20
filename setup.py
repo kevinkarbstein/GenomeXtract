@@ -1,16 +1,15 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="GenomeXtract",
     version="0.1.0",
-    packages=["genomextract"],
+    packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "findGenome = genomextract.findGenome:main",
-            "findClosestGenome = genomextract.findClosestGenome:main",
-            "assembleGenome = genomextract.assembleGenome:main",
-            "assembleGenes = genomextract.assembleGenes:main",
+            "findGenome=genomextract.findGenome:main",
+            "findClosestGenome=genomextract.findClosestGenome:main",
+            "assembleOrgGenome=genomextract.assembleOrgGenome:main",
+            "assembleOrgGenes=genomextract.assembleOrgGenes:main",
         ]
     },
 )
-

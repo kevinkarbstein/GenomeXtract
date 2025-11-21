@@ -1,34 +1,19 @@
-from setuptools import setup, find_packages
-
-setup(
-    name="genomextract",
-    version="0.1.2",
-    packages=find_packages(),
-    entry_points={
-        "console_scripts": [
-            "findGenome=genomextract.findGenome:main",
-            "findClosestGenome=genomextract.findClosestGenome:main",
-            "assembleOrgGenome=genomextract.assembleOrgGenome:main",
-            "assembleOrgGenes=genomextract.assembleOrgGenes:main",
-        ]
-    },
-)
-
-
 #!/usr/bin/env python3
+
 """
-Copyright 2020-2025 Edgardo M. Ortiz (e.ortiz.v@gmail.com)
-https://github.com/edgardomortiz/Captus
+License:
+    Copyright 2025 Kevin Karbstein
+    This script is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Captus' installation script
-
-This file is part of Captus. Captus is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by the Free Software Foundation,
-either version 3 of the License, or (at your option) any later version. Captus is distributed in
-the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-details. You should have received a copy of the GNU General Public License along with Captus. If
-not, see <http://www.gnu.org/licenses/>.
 """
 
 # Make sure this is being run with Python 3.6 or later.
@@ -41,31 +26,26 @@ from setuptools import setup, find_packages
 
 # Get the program version from another file.
 __version__ = "0.0.0"
-exec(open("captus/version.py").read())
+exec(open("genomextract/version.py").read())
 
 setup(
     name="captus",
     version=__version__,
-    url="https://github.com/edgardomortiz/Captus",
-    author="Edgardo M. Ortiz",
-    author_email="e.ortiz.v@gmail.com",
-    description="Tools for hybridization capture-based target enrichment: "
-    "Probe Design, Data Assembly, Marker Extraction and Alignment",
+    url="https://github.com/KK260/GenomeXtract",
+    author="Kevin Karbstein",
+    author_email="k.karbstein@ufl.edu",
+    description="Tools for downloading, filtering, and assembling genomes from NCBI",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    package_data={"data": ["*"], "dependencies": ["scipio-1.4/*", "blat/*"]},
+    package_data={"data": ["*"], "dependencies": ["scipio-1.4/*"]},
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "captus_assembly = captus.captus_assembly:main",
-            "captus = captus.captus_assembly:main",
-            "captus_design = captus.captus_design:main",
-            "captusd = captus.captus_design:main",
-            "concatenate_alignments = captus.concatenate_alignments:main",
-            "most_common_target_per_locus = captus.most_common_target_per_locus:main",
-            "new_targets_from_alignments = captus.new_targets_from_alignments:main",
-            "phylo_commands = captus.phylo_commands:main",
+            "findGenome=genomextract.findGenome:main",
+            "findClosestGenome=genomextract.findClosestGenome:main",
+            "assembleOrgGenome=genomextract.assembleOrgGenome:main",
+            "assembleOrgGenes=genomextract.assembleOrgGenes:main",
         ]
     },
     license="GPL",

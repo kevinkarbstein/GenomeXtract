@@ -38,7 +38,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    package_data={"data": ["*"], "dependencies": ["scipio-1.4/*"]},
+    package_data={"data": ["*"]},
     include_package_data=True,
     entry_points={
         "console_scripts": [

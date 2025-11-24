@@ -1,5 +1,5 @@
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes
-Automatically download, compare, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
+Automatically download, filter, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:

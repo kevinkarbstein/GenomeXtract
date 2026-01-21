@@ -20,9 +20,9 @@ conda install bioconda::astral-tree         # v5.7.8
 **LATEST UPDATE**
 GenomeXtract is now available as Bioconda package:
 ```
-conda create -n genomextract
-conda activate genomextract
-conda install bioconda::genomextract
+mamba create -n genomextract
+mamba activate genomextract
+mamba install bioconda::genomextract
 ```
 
 ### - findGenome(.py)

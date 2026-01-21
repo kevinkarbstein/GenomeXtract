@@ -1,5 +1,5 @@
 {% set version = "0.1.5" %}
-{% set sha256 = "233a3a4164725ce4910bd19a45d64645ea510e51e7a0df9f46686f05a22c58aa" %}
+{% set sha256 = "4491112a8ef121a7e408954143c2182161a8761bbdd1e1c7017d6227d9aa37ef" %}
 
 package:
   name: genomextract

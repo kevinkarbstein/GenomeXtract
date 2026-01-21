@@ -31,17 +31,17 @@ conda install bioconda::genomextract
 
 ```
 # basic code:
-python findGenome(.py) --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
+python findGenome.py // findGenome --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
 # examples:
-python findGenome(.py) --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
+python findGenome.py // findGenome --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
-python findGenome(.py) --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+python findGenome.py // findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
-python findGenome(.py) --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+python findGenome.py // findGenome --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 # usage:
-findGenome(.py) [-h] [--outfolfder OUTFOLDER]
+findGenome         [-h] [--outfolfder OUTFOLDER]
                    [--group GROUP]
                    [--genome_type {chloroplast,mitochondrial,nuclear_genome}]
                    [--annotated]
@@ -74,17 +74,17 @@ options:
 
 ```
 # basic code:
-python findClosestGenome(.py) --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
+python findClosestGenome.py // findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
 
 # examples:
-python findClosestGenome(.py) --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
+python findClosestGenome.py // findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
-python findClosestGenome(.py) --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
+python findClosestGenome.py // findClosestGenome --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
 
-python findClosestGenome(.py) --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
+python findClosestGenome.py // findClosestGenome --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
 
 # usage:
-findGenome(.py) [-h] [--outfolfder OUTFOLDER]
+findClosestGenome  [-h] [--outfolfder OUTFOLDER]
                    [--taxon SPECIES]
                    [--genome_type {chloroplast,mitochondrial,nuclear_genome}]
                    [--annotated]
@@ -110,17 +110,17 @@ options:
 
 ```
 # basic code:
-python assembleGenome(.py) -i INPUT --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+python assembleGenome.py // assembleGenome -i INPUT --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
 For a small test datasets, run: python findGenome(.py) --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenome(.py) -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
+python assembleGenome.py // assembleGenome -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
 
-python assembleOrgGenome(.py) -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/ --overwrite
+python assembleGenome.py // assembleGenome -i chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/ --overwrite
 
 # usage:
-assembleOrgGenome(.py) [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
+assembleOrgGenome      [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
                        [--feature_summary FEATURE_SUMMARY]
                        [--group_feature_summary]
                        [--group_order GROUP_ORDER [GROUP1 GROUP2 ...]]
@@ -158,19 +158,19 @@ options:
 
 ```
 # basic code:
-python assembleOrgGenes(.py) --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
+python assembleOrgGenes.py // assembleOrgGenes --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
 
 # example:
 For a small test datasets, run: python findGenome(.py) --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenes(.py) --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
+python assembleOrgGenes.py // assembleOrgGenes --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
-For a bigger test dataset, run: python findGenome(.py) --group "ranunculales" --outfolder ./chloroplast_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+For a bigger test dataset, run: python findGenome.py // findGenome --group "ranunculales" --outfolder ./chloroplast_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenes(.py) --input mitogenome_ranunculales/*.gb --output_dir ranunculales_mitogene_features —-feature_section_summary --group_order Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
+python assembleOrgGenes.py // assembleOrgGenes --input mitogenome_ranunculales/*.gb --output_dir ranunculales_mitogene_features —-feature_section_summary --group_order Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
 # usage:
-assembleOrgGenes(.py) [-h] --input INPUT [FILE1.gb FILE2.gb ...]
+assembleOrgGenes [-h] --input INPUT [FILE1.gb FILE2.gb ...]
                  [--group_order [GROUP1 GROUP2 ...]]
                  [--feature_section_summary]
                  [--gene_sequences]
@@ -200,3 +200,5 @@ options:
 
 ### If you use any of the scripts, please cite the following article: 
 **Karbstein K, Choudhary N, Xie T, Tomasello S, Wagner ND, Barke BH, Paetzold C, Bradican JP, Preick M, Himmelbach A, Stein N, Papantonis A, Irisarri I, de Vries J, Pucker B, Hörandl E**. Assembling genomes of non-model plants: A case study with evolutionary insights from Ranunculus (Ranunculaceae). **The Plant Journal**, 2025; 00; e70390. https://doi.org/10.1111/tpj.70390
+
+**Karbstein K**. GenomeXtract: A toolkit to easily find, compare, and assemble NCBI genomes. **GitHub repository**, version 0.1.5, 2026. https://doi.org/10.5281/zenodo.17783448

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 License:
-    Copyright 2025 Kevin Karbstein
+    Copyright 2026 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -14,4 +14,4 @@ License:
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-__version__ = "0.1.2"
+__version__ = "0.1.5"

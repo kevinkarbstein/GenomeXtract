@@ -1,6 +1,21 @@
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes
 Automatically download, filter, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 
+**LATEST UPDATE**
+GenomeXtract is now available as Bioconda package:
+
+```
+conda create -n genomextract
+conda activate genomextract
+conda install bioconda::genomextract
+```
+or
+```
+mamba create -n genomextract
+mamba activate genomextract
+mamba install bioconda::genomextract
+```
+
 **Dependencies**
 This script requires Python 3.6+ and the following libraries:
 ```
@@ -16,13 +31,6 @@ conda install bioconda::raxml-ng            # v1.2.2
 conda install bioconda::iqtree              # v3.0.1
 conda install bioconda::mafft               # v7.525
 conda install bioconda::astral-tree         # v5.7.8
-```
-**LATEST UPDATE**
-GenomeXtract is now available as Bioconda package:
-```
-mamba create -n genomextract
-mamba activate genomextract
-mamba install bioconda::genomextract
 ```
 
 ### - findGenome(.py)

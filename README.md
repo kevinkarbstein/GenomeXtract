@@ -33,20 +33,20 @@ conda install bioconda::mafft               # v7.525
 conda install bioconda::astral-tree         # v5.7.8
 ```
 
-### - findGenome(.py)
+### findGenome
 
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
 
 ```
 # basic code:
-python findGenome.py // findGenome --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
+findGenome --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
 # examples:
-python findGenome.py // findGenome --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "chromosome" --overwrite --email XXX@XXX
+findGenome --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "chromosome" --overwrite --email XXX@XXX
 
-python findGenome.py // findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
-python findGenome.py // findGenome --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+findGenome --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 # usage:
 findGenome         [-h] [--outfolfder OUTFOLDER]
@@ -76,20 +76,20 @@ options:
   --email               Your email for NCBI Entrez queries (STRING).
 ```
 
-### - findClosestGenome(.py)
+### findClosestGenome
 
 **This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
 
 ```
 # basic code:
-python findClosestGenome.py // findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
+findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
 
 # examples:
-python findClosestGenome.py // findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "scaffold" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "scaffold" --overwrite --email XXX@XXX
 
-python findClosestGenome.py // findClosestGenome --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
 
-python findClosestGenome.py // findClosestGenome --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]
@@ -113,19 +113,19 @@ options:
   --email               Your email for NCBI Entrez queries (STRING).
 ```
 
-### - assembleOrgGenome(.py)
+### assembleOrgGenome
 **This script automatically extracts and compares gene features, and aligns genome sequences from files downloaded from NCBI**
 
 ```
 # basic code:
-python assembleOrgGenome.py // assembleOrgGenome --input --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
+assembleOrgGenome --input --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-For a small test datasets, run: python findGenome(.py) // findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+For a small test datasets, run: findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenome.py // assembleOrgGenome --input ./chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
+assembleOrgGenome --input ./chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
 
-python assembleOrgGenome.py // assembleOrgGenome --input ./chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/ --overwrite
+assembleOrgGenome --input ./chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_iqtree --output_dir chloroplast_ranunculus_iqtree/ --overwrite
 
 # usage:
 assembleOrgGenome      [-h] [--input INPUT [FILE1.gb FILE2.gb ...]
@@ -161,21 +161,21 @@ options:
   --overwrite               Overwrite existing files if they exist
 ```
 
-### - assembleOrgGenes(.py)
+### assembleOrgGenes
 **This script automatically extracts and compares gene features, and aligns gene sequences from files downloaded from NCBI**
 
 ```
 # basic code:
-python assembleOrgGenes.py // assembleOrgGenes --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
+assembleOrgGenes --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
 
 # example:
 For a small test datasets, run: python findGenome(.py) --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenes.py // assembleOrgGenes --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
+assembleOrgGenes --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
-For a bigger test dataset, run: python findGenome.py // findGenome --group "ranunculales" --outfolder ./chloroplast_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+For a bigger test dataset, run: findGenome --group "ranunculales" --outfolder ./chloroplast_ranunculales --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
 
-python assembleOrgGenes.py // assembleOrgGenes --input mitogenome_ranunculales/*.gb --output_dir ranunculales_mitogene_features —-feature_section_summary --group_order Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
+assembleOrgGenes --input mitogenome_ranunculales/*.gb --output_dir ranunculales_mitogene_features —-feature_section_summary --group_order Papaveroideae Fumarioideae Thalictroideae Delphinieae Ranunculeae Anemoneae --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 
 # usage:
 assembleOrgGenes [-h] --input INPUT [FILE1.gb FILE2.gb ...]

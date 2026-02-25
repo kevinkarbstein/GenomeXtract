@@ -272,9 +272,9 @@ def nearest_species_with_genome(taxon_name, genome_type, email, annotated=False,
 
 def main():
     parser = ArgumentParser(description="Find the closest available reference genome(s) of a given taxon in NCBI.")
-    parser.add_argument('-g', '--taxon', required=True, help="Species or higher-level taxon name (e.g., Genus or Family).")
-    parser.add_argument('-o', '--outfolder', required=True, help="Output folder for the result file.")
-    parser.add_argument('-t', '--genome_type', required=True,
+    parser.add_argument('--taxon', required=True, help="Species or higher-level taxon name (e.g., Genus or Family).")
+    parser.add_argument('--outfolder', required=True, help="Output folder for the result file.")
+    parser.add_argument('--genome_type', required=True,
                         choices=['chloroplast', 'mitochondrial', 'nuclear_genome'])
     parser.add_argument('--annotated', action='store_true',
                         help="Select only gene-annotated nuclear genomes.")
@@ -323,8 +323,13 @@ def main():
                 ]
                 f.write("\t".join(headers) + "\n")
 
+
+
                 for sp, entries in species_dict.items():
                     for md in entries:
+                        if not md:
+                            continue
+                
                         row = [
                             md.get("species", ""),
                             md.get("accession", ""),

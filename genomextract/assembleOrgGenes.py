@@ -4,7 +4,7 @@
 This script assembles organellar genes from a given group (e.g., genus, family, or order) derived from the NCBI database.
 
 License:
-    Copyright 2025 Kevin Karbstein
+    Copyright 2026 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or

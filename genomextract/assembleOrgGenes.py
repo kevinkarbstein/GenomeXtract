@@ -127,7 +127,7 @@ def align_gene_sequences(gene_sequences_dir, output_dir, overwrite):
             output_path = os.path.join(output_dir, file_name)
             if not os.path.exists(output_path) or overwrite:
                 # Run MAFFT alignment
-                subprocess.run(f'mafft --threads -1 --auto {input_path} > {output_path}', shell=True)
+                subprocess.run(f'mafft --thread -1 --auto {input_path} > {output_path}', shell=True)
                 print(f"Aligned sequences for {file_name} written to {output_path}")
 
 def run_raxml_ng_for_genes(aligned_sequences_dir, output_dir, overwrite):

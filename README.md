@@ -121,7 +121,7 @@ options:
 assembleOrgGenome --input --feature_summary FEATURE_SUMMARY --feature_summary --group_order GROUP_ORDER --generate_gene_sequences --align_sequences --run_raxml --output_dir OUTPUT_DIR --select_group SELECT_GROUP --overwrite
 
 # example:
-For a small test datasets, run: findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+For a small test datasets, run: findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite
 
 assembleOrgGenome --input ./chloroplast_ranunculus/*.gb --feature_summary ranunculus_features --generate_gene_sequences --align_sequences --run_raxml --output_dir chloroplast_ranunculus_raxml_ng/ --overwrite
 
@@ -169,7 +169,7 @@ options:
 assembleOrgGenes --input INPUT --group_order GROUP_ORDER --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --output_dir OUTPUT_DIR --overwrite
 
 # example:
-For a small test datasets, run: findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite --email XXX@XXX
+For a small test datasets, run: findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --overwrite
 
 assembleOrgGenes --input chloroplast_ranunculus/*.gb --output_dir ranunculus_plastid_gene_features --feature_section_summary --gene_sequences --align_sequences --run_raxml --run_astral --overwrite
 

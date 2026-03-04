@@ -4,7 +4,7 @@
 This script finds the closest available plastome, mitogenome, and nuclear genome from a given species in the public NCBI database. 
 
 License:
-    Copyright 2025 Kevin Karbstein
+    Copyright 2026 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -325,28 +325,39 @@ def main():
 
 
 
-                for sp, entries in species_dict.items():
-                    for md in entries:
-                        if not md:
-                            continue
-                
-                        row = [
-                            md.get("species", ""),
-                            md.get("accession", ""),
-                            md.get("assembly_name", ""),
-                            md.get("assembly_level", ""),
-                            md.get("assembly_method", ""),
-                            md.get("assembly_date", ""),
-                            md.get("provider", ""),
-                            md.get("bioproject", ""),
-                            md.get("biosample", ""),
-                            md.get("annotation_available", ""),
-                            md.get("representation", ""),
-                            str(md.get("n50", "")),
-                            str(md.get("chromosomes", ""))
-                        ]
-                        f.write("\t".join(row) + "\n")
-
+        for sp, entries in species_dict.items():
+            for entry in entries:
+        
+                # Case 1: Organellar genome (entry is accession string)
+                if isinstance(entry, str):
+                    row = [
+                        sp,
+                        entry,
+                        "", "", "", "", "", "", "", "", "", "", ""
+                    ]
+        
+                # Case 2: Nuclear genome (entry is metadata dict)
+                elif isinstance(entry, dict):
+                    md = entry
+                    row = [
+                        md.get("species", ""),
+                        md.get("accession", ""),
+                        md.get("assembly_name", ""),
+                        md.get("assembly_level", ""),
+                        md.get("assembly_method", ""),
+                        md.get("assembly_date", ""),
+                        md.get("provider", ""),
+                        md.get("bioproject", ""),
+                        md.get("biosample", ""),
+                        md.get("annotation_available", ""),
+                        md.get("representation", ""),
+                        str(md.get("n50", "")),
+                        str(md.get("chromosomes", ""))
+                    ]
+                else:
+                    continue
+        
+                f.write("\t".join(row) + "\n")
             logging.info(f"Nearest species with a {args.genome_type} saved to {out}")
         else:
             logging.warning("No genome found in the lineage.")
@@ -376,8 +387,20 @@ def main():
             ]
             f.write("\t".join(headers) + "\n")
 
-            for sp, entries in species_dict.items():
-                for md in entries:
+        for sp, entries in species_dict.items():
+            for entry in entries:
+        
+                # Case 1: Organellar genome (entry is accession string)
+                if isinstance(entry, str):
+                    row = [
+                        sp,
+                        entry,
+                        "", "", "", "", "", "", "", "", "", "", ""
+                    ]
+        
+                # Case 2: Nuclear genome (entry is metadata dict)
+                elif isinstance(entry, dict):
+                    md = entry
                     row = [
                         md.get("species", ""),
                         md.get("accession", ""),
@@ -393,8 +416,11 @@ def main():
                         str(md.get("n50", "")),
                         str(md.get("chromosomes", ""))
                     ]
-                    f.write("\t".join(row) + "\n")
-
+                else:
+                    continue
+        
+                f.write("\t".join(row) + "\n")
+                
         logging.info(f"Found {len(species_dict)} species.")
         logging.info(f"Saved list to {out}.")
     else:

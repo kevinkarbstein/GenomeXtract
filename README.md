@@ -154,7 +154,7 @@ options:
   --align_sequences         Align gene sequences using MAFFT
   --run_raxml               Run RAxML-NG for phylogenetic analysis
   --raxml_model             RAxML-NG model to use (STRING; default: GTR+G)
-  --bootstrap_replicates    Number of bootstrap replicates for RAxML-NG (INT; default: 100)
+  --bootstrap_replicates    Number of bootstrap replicates for RAxML-NG or IQ-TREE (INT; default: 100)
   --run_iqtree              Run IQ-TREE for phylogenetic analysis
   --select_group            Limit gene extraction to a specific group (STRING)  
   --output_dir              Output directory for gene sequences and alignment results (STRING)

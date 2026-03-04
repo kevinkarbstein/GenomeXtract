@@ -313,55 +313,55 @@ def main():
             args.annotated,
             args.assembly_level
         )
-        if species_dict:
-            with open(out, "w") as f:
-                headers = [
-                    "Species", "Accession", "Assembly_Name", "Assembly_Level",
-                    "Assembly_Method", "Assembly_Date", "Provider",
-                    "Bioproject", "Biosample", "Annotated",
-                    "Representation", "N50", "Chromosomes"
-                ]
-                f.write("\t".join(headers) + "\n")
+    if species_dict:
+        with open(out, "w") as f:
+            headers = [
+                "Species", "Accession", "Assembly_Name", "Assembly_Level",
+                "Assembly_Method", "Assembly_Date", "Provider",
+                "Bioproject", "Biosample", "Annotated",
+                "Representation", "N50", "Chromosomes"
+            ]
+            f.write("\t".join(headers) + "\n")
 
+            for sp, entries in species_dict.items():
+                for entry in entries:
 
+                    # Organellar genome (accession string)
+                    if isinstance(entry, str):
+                        row = [
+                            sp,
+                            entry,
+                            "", "", "", "", "", "", "", "", "", "", ""
+                        ]
 
-        for sp, entries in species_dict.items():
-            for entry in entries:
-        
-                # Case 1: Organellar genome (entry is accession string)
-                if isinstance(entry, str):
-                    row = [
-                        sp,
-                        entry,
-                        "", "", "", "", "", "", "", "", "", "", ""
-                    ]
-        
-                # Case 2: Nuclear genome (entry is metadata dict)
-                elif isinstance(entry, dict):
-                    md = entry
-                    row = [
-                        md.get("species", ""),
-                        md.get("accession", ""),
-                        md.get("assembly_name", ""),
-                        md.get("assembly_level", ""),
-                        md.get("assembly_method", ""),
-                        md.get("assembly_date", ""),
-                        md.get("provider", ""),
-                        md.get("bioproject", ""),
-                        md.get("biosample", ""),
-                        md.get("annotation_available", ""),
-                        md.get("representation", ""),
-                        str(md.get("n50", "")),
-                        str(md.get("chromosomes", ""))
-                    ]
-                else:
-                    continue
-        
-                f.write("\t".join(row) + "\n")
-            logging.info(f"Nearest species with a {args.genome_type} saved to {out}")
-        else:
-            logging.warning("No genome found in the lineage.")
-        return
+                    # Nuclear genome (metadata dict)
+                    elif isinstance(entry, dict):
+                        md = entry
+                        row = [
+                            md.get("species", ""),
+                            md.get("accession", ""),
+                            md.get("assembly_name", ""),
+                            md.get("assembly_level", ""),
+                            md.get("assembly_method", ""),
+                            md.get("assembly_date", ""),
+                            md.get("provider", ""),
+                            md.get("bioproject", ""),
+                            md.get("biosample", ""),
+                            md.get("annotation_available", ""),
+                            md.get("representation", ""),
+                            str(md.get("n50", "")),
+                            str(md.get("chromosomes", ""))
+                        ]
+                    else:
+                        continue
+
+                    f.write("\t".join(row) + "\n")
+
+        logging.info(f"Nearest species with a {args.genome_type} saved to {out}")
+    else:
+        logging.warning("No genome found in the lineage.")
+    return
+
     # ------------------------
     # Higher-level taxon search
     # ------------------------
@@ -387,44 +387,44 @@ def main():
             ]
             f.write("\t".join(headers) + "\n")
 
-        for sp, entries in species_dict.items():
-            for entry in entries:
-        
-                # Case 1: Organellar genome (entry is accession string)
-                if isinstance(entry, str):
-                    row = [
-                        sp,
-                        entry,
-                        "", "", "", "", "", "", "", "", "", "", ""
-                    ]
-        
-                # Case 2: Nuclear genome (entry is metadata dict)
-                elif isinstance(entry, dict):
-                    md = entry
-                    row = [
-                        md.get("species", ""),
-                        md.get("accession", ""),
-                        md.get("assembly_name", ""),
-                        md.get("assembly_level", ""),
-                        md.get("assembly_method", ""),
-                        md.get("assembly_date", ""),
-                        md.get("provider", ""),
-                        md.get("bioproject", ""),
-                        md.get("biosample", ""),
-                        md.get("annotation_available", ""),
-                        md.get("representation", ""),
-                        str(md.get("n50", "")),
-                        str(md.get("chromosomes", ""))
-                    ]
-                else:
-                    continue
-        
-                f.write("\t".join(row) + "\n")
-                
-        logging.info(f"Found {len(species_dict)} species.")
-        logging.info(f"Saved list to {out}.")
+            for sp, entries in species_dict.items():
+                for entry in entries:
+
+                    # Organellar genome (accession string)
+                    if isinstance(entry, str):
+                        row = [
+                            sp,
+                            entry,
+                            "", "", "", "", "", "", "", "", "", "", ""
+                        ]
+
+                    # Nuclear genome (metadata dict)
+                    elif isinstance(entry, dict):
+                        md = entry
+                        row = [
+                            md.get("species", ""),
+                            md.get("accession", ""),
+                            md.get("assembly_name", ""),
+                            md.get("assembly_level", ""),
+                            md.get("assembly_method", ""),
+                            md.get("assembly_date", ""),
+                            md.get("provider", ""),
+                            md.get("bioproject", ""),
+                            md.get("biosample", ""),
+                            md.get("annotation_available", ""),
+                            md.get("representation", ""),
+                            str(md.get("n50", "")),
+                            str(md.get("chromosomes", ""))
+                        ]
+                    else:
+                        continue
+
+                    f.write("\t".join(row) + "\n")
+
+        logging.info(f"Nearest species with a {args.genome_type} saved to {out}")
     else:
-        logging.warning("No genomes found for the given taxon.")
+        logging.warning("No genome found in the lineage.")
+    return
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@
 This script finds all available plastomes, mitogenomes, and nuclear genomes from a given group (e.g., genus, family, or order) in the public NCBI database. 
 
 License:
-    Copyright 2025 Kevin Karbstein
+    Copyright 2026 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -52,7 +52,9 @@ def setup_excluded_folder(outfolder):
     return excluded_folder
 
 def estimate_organellar_genome_size(term, retmax, db):
-    """Estimate the total size of the genomes in gigabytes."""
+    """Estimate the total size of the genomes in gigabytes.
+    This may take a while.
+    """
     try:
         handle = Entrez.esearch(db=db, term=term, idtype="acc", retmax=retmax)
         record = Entrez.read(handle)
@@ -131,7 +133,9 @@ def fetch_genome_ids(term, retmax, batch_size, db):
         raise
 
 def download_genomes(batch_ids, db):
-    """Download genomes from NCBI."""
+    """Download genomes from NCBI.
+    This may take a while.
+    """
     try:
         handle = Entrez.efetch(db=db, id=batch_ids, rettype="gb", retmode="text")
         return SeqIO.parse(handle, "genbank")

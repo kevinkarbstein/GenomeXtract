@@ -4,7 +4,7 @@
 This script assembles organellar genomes from a given group (e.g., genus, family, or order) derived from the NCBI database. 
 
 License:
-    Copyright 2025 Kevin Karbstein
+    Copyright 2026 Kevin Karbstein
     This script is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -222,7 +222,7 @@ def main():
     parser.add_argument('--align_sequences', action='store_true', help='Align gene sequences using MAFFT')
     parser.add_argument('--run_raxml', action='store_true', help='Run RAxML-NG for phylogenetic analysis')
     parser.add_argument('--raxml_model', default='GTR+G', help='RAxML-NG model to use (default: GTR+G)')
-    parser.add_argument('--bootstrap_replicates', type=int, default=100, help='Number of bootstrap replicates for RAxML-NG (default: 100)')
+    parser.add_argument('--bootstrap_replicates', type=int, default=100, help='Number of bootstrap replicates for RAxML-NG and IQ-TREE (default: 100)')
     parser.add_argument('--run_iqtree', action='store_true', help='Run IQ-TREE for phylogenetic analysis')
     parser.add_argument('--select_group', default=None, help='Limit gene extraction to a specific group')
     parser.add_argument('--output_dir', default='gene_output', help='Output directory for gene sequences and alignment results')

@@ -1,5 +1,5 @@
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes
-Automatically download, filter, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
+Automatically find, download, filter, compare, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 
 **LATEST UPDATE**
 GenomeXtract is now available as Bioconda package:

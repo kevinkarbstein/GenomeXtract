@@ -1,6 +1,6 @@
 <div align="center" style="display: flex; justify-content: space-between; align-items: center;">
-  <a href="https://github.com/LMKoesters/LazyModeler">
-    <img src="https://github.com/LMKoesters/LazyModeler/blob/main/logo_genomextract.png?raw=true" 
+  <a href="https://github.com/kevinkarbstein/GenomeXtract">
+    <img src="https://github.com/kevinkarbstein/GenomeXtract/blob/main/logo_genomextract.png?raw=true" 
          alt="GenomeXtract Logo" 
          width="400" 
          style="border-radius: 10px;">

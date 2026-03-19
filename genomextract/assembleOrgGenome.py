@@ -179,6 +179,7 @@ def align_combined_sequences(input_fasta_file, aligned_output_file, overwrite):
     Align combined gene sequences using MAFFT.
     """
     if not os.path.exists(aligned_output_file) or overwrite:
+        print(f"Start aligning sequences with MAFFT")
         mafft_cmd = f"mafft --thread -1 --adjustdirectionaccurately --quiet --auto {input_fasta_file} > {aligned_output_file}"
         subprocess.run(mafft_cmd, shell=True)
         print(f"Aligned sequences written to {aligned_output_file}")

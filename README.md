@@ -1,3 +1,12 @@
+<div align="center" style="display: flex; justify-content: space-between; align-items: center;">
+  <a href="https://github.com/LMKoesters/LazyModeler">
+    <img src="https://github.com/LMKoesters/LazyModeler/blob/main/logo_genomextract.png?raw=true" 
+         alt="GenomeXtract Logo" 
+         width="400" 
+         style="border-radius: 10px;">
+  </a>
+</div>
+
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes
 Automatically find, download, filter, compare, and assemble genomes (or genes) from NCBI – saving you time and keeping genomics fun.
 

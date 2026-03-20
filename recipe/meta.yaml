@@ -34,6 +34,7 @@ requirements:
     - mafft ==7.525
     - astral-tree ==5.7.8
     - blast ==2.17.0
+    - mash ==2.3
 
 test:
   commands:

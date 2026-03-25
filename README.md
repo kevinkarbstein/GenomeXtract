@@ -44,7 +44,7 @@ conda install bioconda::astral-tree         # v5.7.8
 
 ### findGenome
 
-**This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
+**This script automatically downloads and filters organellar and nuclear genome sequence(s) from the NCBI database**
 
 ```
 # basic code:
@@ -87,18 +87,18 @@ options:
 
 ### findClosestGenome
 
-**This script will automatically find the closest available reference genome sequence(s) of a given taxon in NCBI**
+**This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI**
 
 ```
 # basic code:
-findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite
+findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite --email XXX@XXX
 
 # examples:
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "scaffold" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "chloroplast" --assembly_level "scaffold" --overwrite --max-genomes 100 --min-shared-fraction 0.7 --min_site_occupancy 0.5 --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_chloroplast_ranunculus --genome_type "chloroplast" --max-genomes 100 --min-shared-fraction 0.7 --min_site_occupancy 0.5 --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "mitochondrial" --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "nuclear_genome" --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]

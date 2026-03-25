@@ -87,7 +87,7 @@ options:
 
 ### findClosestGenome
 
-**This script will automatically download and filter organellar and nuclear genomes from the NCBI database**
+**This script will automatically find the closest available reference genome sequence(s) of a given taxon in NCBI**
 
 ```
 # basic code:
@@ -107,6 +107,11 @@ findClosestGenome  [-h] [--outfolfder OUTFOLDER]
                    [--annotated]
                    [--assembly_level {scaffold, chromosome}]
                    [--overwrite]
+                   [--genome-size-mb GENOME_SIZE_MB]
+                   [--max-genomes MAX_GENOMES]
+                   [--min-shared-fraction MIN_SHARED_FRACTION]
+                   [--min_site_occupancy MIN_SITE_OCCUPANNCY]
+                   [--collapse-to-species]
                    [--email EMAIL]
 
 Find the closest available reference genomes(s) of a given taxon in NCBI.
@@ -118,6 +123,16 @@ options:
   --genome_type         The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --annotated           Select only gene-annotated nuclear genomes.
   --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
+  --genome-size-mb      Expected genome size in Mb. If the target taxon has no genome, this value is used
+                        to select the most similar proxy genome (FLOAT, default: None).
+  --max-genomes         Maximum number of genomes to compare target genome. The more genomes allowed,
+                        the longer the distance-based sample calculations will take (INTEGER, default: None).
+  --min-shared-fraction Only organellar genome sequences: The fraction of positions where sequence overlaps
+                        with others (FLOAT, default: 0.7).
+  --min_site_occupancy  Only organellar genome sequences: The fraction of sequences that must have a base
+                        at a site (FLOAT, default: 0.5).
+  --collapse-to-species Only organellar genome sequences: Collapse multiple accessions per species
+                        to the best Average Nucleotide Identity (ANI) hit.
   --overwrite           Overwrite existing output folder.
   --email               Your email for NCBI Entrez queries (STRING).
 ```

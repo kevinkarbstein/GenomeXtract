@@ -90,7 +90,7 @@ options:
 **This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI**
 This script automatically finds the closest available plastome, mitogenome, and nuclear genome sequence(s) from any given taxon in the public NCBI database.
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
-organellar genomes or by using hash-based distance for nuclear genomes. Alternatively, the script can be used to find all genome sequences 
+organellar genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for nuclear genomes. Alternatively, the script can be used to find all genome sequences 
 for a given taxonomic group. The script also automatically filters misaligned samples (organellar genomes), 
 or collapses all individuals of a given taxon for genetic similarity comparisons. 
 

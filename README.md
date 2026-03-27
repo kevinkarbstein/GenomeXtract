@@ -92,7 +92,7 @@ This script automatically finds the closest available plastome, mitogenome, and 
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
 organellar genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for nuclear genomes. Alternatively, the script can be used to find all genome sequences 
 for a given taxonomic group. The script also automatically filters misaligned samples (organellar genomes), 
-or collapses all individuals of a given taxon for genetic similarity comparisons. 
+or collapses all individuals of a given taxon for genetic similarity comparisons. **If you are using the 'nuclear genome' option, please ensure that there is enough space available in your local home directory.**
 
 ```
 # basic code:

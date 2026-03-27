@@ -28,7 +28,7 @@ requirements:
     - pandas
     - requests
     - openpyxl
-    - ncbi-datasets-cli ==18.22.1
+    - ncbi-datasets-cli ==18.21.1
     - raxml-ng ==1.2.2
     - iqtree ==3.0.1
     - mafft ==7.525

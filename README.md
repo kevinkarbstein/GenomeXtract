@@ -117,6 +117,7 @@ findClosestGenome  [-h] [--outfolfder OUTFOLDER]
                    [--min-shared-fraction MIN_SHARED_FRACTION]
                    [--min_site_occupancy MIN_SITE_OCCUPANNCY]
                    [--collapse-to-species]
+                   [--include]
                    [--email EMAIL]
 
 Find the closest available reference genomes(s) of a given taxon in NCBI.
@@ -138,6 +139,7 @@ options:
                         at a site (FLOAT, default: 0.5).
   --collapse-to-species Only organellar genome sequences: Collapse multiple accessions per species
                         to the best Average Nucleotide Identity (ANI) hit.
+  --include             Download nuclear genome sequence(s) from NCBI.
   --overwrite           Overwrite existing output folder.
   --email               Your email for NCBI Entrez queries (STRING).
 ```

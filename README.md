@@ -137,8 +137,8 @@ options:
                         with others (FLOAT, default: 0.7).
   --min_site_occupancy  Only plastid genome sequences: The fraction of sequences that must have a base
                         at a site (FLOAT, default: 0.5).
-  --collapse-to-species Only plastid genome sequences: Collapse multiple accessions per species
-                        to the best Average Nucleotide Identity (ANI) hit.
+  --collapse-to-species Collapse multiple accessions per species
+                        to the best Average Nucleotide Identity (ANI) or Mash Distance hit.
   --include             Download nuclear genome sequence(s) from NCBI (STRING; default=genome).
   --rank                Highest taxonomic rank to include when searching for related genomes.
                         For species input, search expands progressively up to this rank (STRING; default: genus).

@@ -51,11 +51,11 @@ conda install bioconda::astral-tree         # v5.7.8
 findGenome --group "group" --outfolder "outfolder" --genome_type "chloroplast" --batch_size 50 --duplicate_removal --max_individuals_per_species INT --overwrite
 
 # examples:
-findGenome --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "chromosome" --overwrite --email XXX@XXX
-
 findGenome --group "ranunculus" --outfolder ./chloroplast_ranunculus --genome_type "chloroplast" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
 
 findGenome --group "ranunculaceae" --outfolder ./mitogenome_ranunculaceae --genome_type "mitochondrial" --duplicate_removal --max_individuals 2 --batch_size 50 --overwrite --email XXX@XXX
+
+findGenome --group "ranunculaceae" --outfolder ./genome_ranunculaceae --genome_type "nuclear_genome" --assembly_level "chromosome" --overwrite --email XXX@XXX
 
 # usage:
 findGenome         [-h] [--outfolfder OUTFOLDER]
@@ -103,7 +103,7 @@ findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_pla
 
 findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenomes_ranunculales --genome_type "mitochondrial" --collapse_to_species --rank order --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenome_ranunculaceae --genome_type "nuclear_genome" --assembly_level chromosome --max_genomes 6 --collapse_to_species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenomes_ranunculaceae --genome_type "nuclear_genome" --assembly_level chromosome --max_genomes 6 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]
@@ -225,16 +225,16 @@ Process GenBank files and extract gene names and sequences.
 
 options:
   -h, --help                  show this help message and exit
-  --input INPUT               Path to the GenBank files
+  --input INPUT               Path to the GenBank files (STRING)
   --group_order GROUP_ORDER [GROUP_ORDER ...]
-                              Limit gene extraction to a specific group
+                              Limit gene extraction to a specific group (STRING)
   --feature_section_summary   Generate section-wise feature summary
                         
   --gene_sequences            Generate gene sequences in FASTA format
   --align_sequences           Align gene sequences using MAFFT
   --run_raxml                 Run RAxML-NG for gene-tree calculations
   --run_astral                Run Astral for coalescent-based phylogenetic tree inference
-  --output_dir OUTPUT_DIR     Output directory for gene sequences and alignment results              
+  --output_dir OUTPUT_DIR     Output directory for gene sequences and alignment results (STRING)              
   --overwrite                 Overwrite existing files if they exist
 ```
 

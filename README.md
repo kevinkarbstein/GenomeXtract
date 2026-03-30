@@ -8,7 +8,8 @@
 </div>
 
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes for phylogenomics
-Automatically find, download, filter, compare, and assemble genomes (or genes) from NCBI for (phylo)genomics and biodiversity research – saving you time and keeping genomics fun.
+Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial and nuclear genomes
+for evolutionary and bioidiversity research – saving you time and keeping genomics fun.
 
 **LATEST UPDATE**
 GenomeXtract is now available as Bioconda package:

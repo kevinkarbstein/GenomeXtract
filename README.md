@@ -34,12 +34,15 @@ pip install biopython
 pip install pandas
 pip install requests
 pip install openpyxl
+pip install alnPairDist
 
 conda install -c bioconda ncbi-datasets-cli # v18.9.0
 conda install bioconda::raxml-ng            # v1.2.2
 conda install bioconda::iqtree              # v3.0.1
 conda install bioconda::mafft               # v7.525
 conda install bioconda::astral-tree         # v5.7.8
+conda install bioconda::blast               # v2.17.0
+conda install bioconda::mash                # v2.3
 ```
 
 ### findGenome

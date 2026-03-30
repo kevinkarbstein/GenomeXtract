@@ -88,7 +88,7 @@ options:
 ### findClosestGenome
 
 **This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI**
-This script automatically finds the closest available plastome, mitogenome, and nuclear genome sequence(s) from any given taxon in the public NCBI database.
+This script automatically finds the closest available plastid, mitochondrial, or nuclear genome sequence(s) from any given taxon in the public NCBI database.
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
 plastid genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for mitochondrial and nuclear genomes. Alternatively, the script can be used to find all genome sequences 
 for a given taxonomic group by selecting the largest genome sequence as target. The script also automatically filters misaligned samples (organellar genomes), 
@@ -133,11 +133,11 @@ options:
                         to select the most similar proxy genome (FLOAT, default: None).
   --max-genomes         Maximum number of genomes to compare target genome. The more genomes allowed,
                         the longer the distance-based sample calculations will take (INTEGER, default: None).
-  --min-shared-fraction Only organellar genome sequences: The fraction of positions where sequence overlaps
+  --min-shared-fraction Only plastid genome sequences: The fraction of positions where sequence overlaps
                         with others (FLOAT, default: 0.7).
-  --min_site_occupancy  Only organellar genome sequences: The fraction of sequences that must have a base
+  --min_site_occupancy  Only plastid genome sequences: The fraction of sequences that must have a base
                         at a site (FLOAT, default: 0.5).
-  --collapse-to-species Only organellar genome sequences: Collapse multiple accessions per species
+  --collapse-to-species Only plastid genome sequences: Collapse multiple accessions per species
                         to the best Average Nucleotide Identity (ANI) hit.
   --include             Download nuclear genome sequence(s) from NCBI (STRING; default=genome).
   --rank                Highest taxonomic rank to include when searching for related genomes.

@@ -150,7 +150,7 @@ options:
 ```
 
 ### assembleOrgGenome
-**This script automatically extracts and compares gene features, and aligns genome sequences from files downloaded from NCBI.**
+**This script automatically extracts and compares gene features, and aligns plastid genome sequences from files downloaded from NCBI.**
 
 ```
 # basic code:
@@ -198,7 +198,7 @@ options:
 ```
 
 ### assembleOrgGenes
-**This script automatically extracts and compares gene features, and aligns gene sequences from files downloaded from NCBI.**
+**This script automatically extracts and compares organellar gene features, and aligns organellar gene sequences from files downloaded from NCBI.**
 
 ```
 # basic code:

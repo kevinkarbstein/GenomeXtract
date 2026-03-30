@@ -91,7 +91,7 @@ options:
 This script automatically finds the closest available plastid, mitochondrial, or nuclear genome sequence(s) from any given taxon in the public NCBI database.
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
 plastid genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for mitochondrial and nuclear genomes. Alternatively, the script can be used to find all genome sequences 
-for a given taxonomic group by selecting the largest genome sequence as target. The script also automatically filters misaligned samples (organellar genomes), 
+for a given taxonomic group by selecting the largest genome sequence or a user-specfied genome size as target. The script also automatically filters misaligned samples (organellar genomes), 
 or collapses all individuals of a given taxon for genetic similarity comparisons. **If you are using the 'nuclear genome' option, please ensure that there is enough space available in your local home directory.**
 
 ```
@@ -99,11 +99,11 @@ or collapses all individuals of a given taxon for genetic similarity comparisons
 findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite --email XXX@XXX
 
 # examples:
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "chloroplast" --assembly_level "scaffold" --max-genomes 100 --min-shared-fraction 0.7 --min_site_occupancy 0.5 --collapse-to-species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "chloroplast" --assembly_level "scaffold" --max_genomes 100 --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenome_ranunculus --genome_type "miitochondrial" --min-shared-fraction 0.7 --min_site_occupancy 0.5 --collapse-to-species --rank order --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenome_ranunculus --genome_type "mitochondrial" --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank order --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "nuclear_genome" --max-genomes 10 --collapse-to-species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "nuclear_genome" --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]
@@ -112,11 +112,11 @@ findClosestGenome  [-h] [--outfolfder OUTFOLDER]
                    [--annotated]
                    [--assembly_level {scaffold, chromosome}]
                    [--overwrite]
-                   [--genome-size-mb GENOME_SIZE_MB]
-                   [--max-genomes MAX_GENOMES]
-                   [--min-shared-fraction MIN_SHARED_FRACTION]
+                   [--genome_size_mb GENOME_SIZE_MB]
+                   [--max_genomes MAX_GENOMES]
+                   [--min_shared_fraction MIN_SHARED_FRACTION]
                    [--min_site_occupancy MIN_SITE_OCCUPANNCY]
-                   [--collapse-to-species]
+                   [--collapse_to_species]
                    [--include]
                    [--email EMAIL]
 
@@ -129,15 +129,15 @@ options:
   --genome_type         The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --annotated           Select only gene-annotated nuclear genomes.
   --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
-  --genome-size-mb      Expected genome size in Mb. If the target taxon has no genome, this value is used
+  --genome_size_mb      Expected genome size in Mb. If the target taxon has no genome, this value is used
                         to select the most similar proxy genome (FLOAT, default: None).
-  --max-genomes         Maximum number of genomes to compare target genome. The more genomes allowed,
+  --max_genomes         Maximum number of genomes to compare target genome. The more genomes allowed,
                         the longer the distance-based sample calculations will take (INTEGER, default: None).
-  --min-shared-fraction Only plastid genome sequences: The fraction of positions where sequence overlaps
+  --min_shared_fraction Only plastid genome sequences: The fraction of positions where sequence overlaps
                         with others (FLOAT, default: 0.7).
   --min_site_occupancy  Only plastid genome sequences: The fraction of sequences that must have a base
                         at a site (FLOAT, default: 0.5).
-  --collapse-to-species Collapse multiple accessions per species
+  --collapse_to_species Collapse multiple accessions per species
                         to the best Average Nucleotide Identity (ANI) or Mash Distance hit.
   --include             Download nuclear genome sequence(s) from NCBI (STRING; default=genome).
   --rank                Highest taxonomic rank to include when searching for related genomes.

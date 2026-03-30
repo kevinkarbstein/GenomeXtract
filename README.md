@@ -99,11 +99,11 @@ or collapses all individuals of a given taxon for genetic similarity comparisons
 findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast" --overwrite --email XXX@XXX
 
 # examples:
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_genome_ranunculaceae --genome_type "chloroplast" --assembly_level "scaffold" --max_genomes 100 --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_plastomes_ranunculaceae --genome_type "chloroplast" --max_genomes 80 --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenome_ranunculus --genome_type "mitochondrial" --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank order --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenomes_ranunculales --genome_type "mitochondrial" --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank order --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_mitogenome_ranunculaceae --genome_type "nuclear_genome" --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenome_ranunculaceae --genome_type "nuclear_genome" --asembly_level chromosome --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]
@@ -128,7 +128,7 @@ options:
   --taxon               Species or higher-level taxon name (STRING; e.g., Genus or Family).
   --genome_type         The type of genome to download (STRING; chloroplast,mitochondrial,nuclear_genome).
   --annotated           Select only gene-annotated nuclear genomes.
-  --assembly_level      Choose the assmbly level of the nuclear genome (STRING; scaffold, chromosome).
+  --assembly_level      Choose the assmbly level of the nuclear genome (STRING; contig, scaffold, chromosome, complete).
   --genome_size_mb      Expected genome size in Mb. If the target taxon has no genome, this value is used
                         to select the most similar proxy genome (FLOAT, default: None).
   --max_genomes         Maximum number of genomes to compare target genome. The more genomes allowed,

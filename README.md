@@ -47,7 +47,7 @@ conda install bioconda::mash                # v2.3
 
 ### findGenome
 
-**This script automatically downloads and filters organellar and nuclear genome sequence(s) from the NCBI database**
+**This script automatically downloads and filters organellar and nuclear genome sequence(s) from the NCBI database.**
 
 ```
 # basic code:
@@ -90,7 +90,7 @@ options:
 
 ### findClosestGenome
 
-**This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI**
+**This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI.**
 This script automatically finds the closest available plastid, mitochondrial, or nuclear genome sequence(s) from any given taxon in the public NCBI database.
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
 plastid genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for mitochondrial and nuclear genomes. Alternatively, the script can be used to find all genome sequences 
@@ -150,7 +150,7 @@ options:
 ```
 
 ### assembleOrgGenome
-**This script automatically extracts and compares gene features, and aligns genome sequences from files downloaded from NCBI**
+**This script automatically extracts and compares gene features, and aligns genome sequences from files downloaded from NCBI.**
 
 ```
 # basic code:
@@ -198,7 +198,7 @@ options:
 ```
 
 ### assembleOrgGenes
-**This script automatically extracts and compares gene features, and aligns gene sequences from files downloaded from NCBI**
+**This script automatically extracts and compares gene features, and aligns gene sequences from files downloaded from NCBI.**
 
 ```
 # basic code:

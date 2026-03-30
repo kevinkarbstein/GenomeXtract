@@ -103,7 +103,7 @@ findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_pla
 
 findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenomes_ranunculales --genome_type "mitochondrial" --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank order --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenome_ranunculaceae --genome_type "nuclear_genome" --asembly_level chromosome --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenome_ranunculaceae --genome_type "nuclear_genome" --assembly_level chromosome --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
 # usage:
 findClosestGenome  [-h] [--outfolfder OUTFOLDER]

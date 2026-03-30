@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This script finds the closest available plastome, mitogenome, and nuclear genome from a given species in the public NCBI database. 
+This script searches the public NCBI database for the closest available plastome, mitogenome or nuclear genome sequence(s) from a given species or taxonomic rank. 
 
 License:
     Copyright 2026 Kevin Karbstein

@@ -7,7 +7,7 @@
   </a>
 </div>
 
-# GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes for phylogenomics
+# GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes
 Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial and nuclear genomes
 for evolutionary and bioidiversity research – saving you time and keeping genomics fun.
 

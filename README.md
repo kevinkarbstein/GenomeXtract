@@ -101,7 +101,7 @@ findClosestGenome --taxon "species/taxon" "outfolder" --genome_type "chloroplast
 # examples:
 findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_plastomes_ranunculaceae --genome_type "chloroplast" --max_genomes 80 --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank family --overwrite --email XXX@XXX
 
-findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenomes_ranunculales --genome_type "mitochondrial" --min_shared_fraction 0.7 --min_site_occupancy 0.5 --collapse_to_species --rank order --overwrite --email XXX@XXX
+findClosestGenome --taxon "ranunculus auricomus" --outfolder ./closest_mitogenomes_ranunculales --genome_type "mitochondrial" --collapse_to_species --rank order --overwrite --email XXX@XXX
 
 findClosestGenome --taxon "ranunculus cassubicifolius" --outfolder ./closest_nucleargenome_ranunculaceae --genome_type "nuclear_genome" --assembly_level chromosome --max_genomes 10 --collapse_to_species --rank family --overwrite --email XXX@XXX
 

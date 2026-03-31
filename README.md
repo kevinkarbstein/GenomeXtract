@@ -1,8 +1,8 @@
 <div align="center" style="display: flex; justify-content: space-between; align-items: center;">
   <a href="https://github.com/kevinkarbstein/GenomeXtract">
-    <img src="https://github.com/kevinkarbstein/GenomeXtract/blob/main/logo_genomextract.png?raw=true" 
+    <img src="https://github.com/kevinkarbstein/GenomeXtract/logo_genomextract.png?raw=true" 
          alt="GenomeXtract Logo" 
-         width="400" 
+         width="300" 
          style="border-radius: 10px;">
   </a>
 </div>

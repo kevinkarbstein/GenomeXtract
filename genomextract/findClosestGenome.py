@@ -1370,67 +1370,49 @@ def filter_alignment_by_shared_coverage(
 # Calculate average neighbor identity (alignment-based, chloroplast)
 # -------------------------------------------------------------------
 
-
 def run_alnPairDist(alignment_file, output_file):
     alignment_file = os.path.abspath(alignment_file)
     outdir = os.path.dirname(output_file)
     os.makedirs(outdir, exist_ok=True)
 
-    cwd = os.getcwd()
-    outfile_name = os.path.basename(output_file)
+    aln = AlignIO.read(alignment_file, "fasta")
 
-    try:
-        os.chdir(outdir)
-        cmd = f"alnPairDist --aln {alignment_file}"
+    # convert once
 
-        with open(outfile_name, "w") as out:
-            subprocess.run(cmd, shell=True, check=True, stdout=out)
+    #records = [(rec.id, str(rec.seq).upper()) for rec in aln]
+    records = [(rec.description, str(rec.seq).upper()) for rec in aln] #full description
 
-    finally:
-        os.chdir(cwd)
+    def calc_pid(seq1, seq2):
+        matches = 0
+        compared = 0
+
+        for a, b in zip(seq1, seq2):
+            # skip sites with gaps or ambiguous characters
+            if a not in "ACGT" or b not in "ACGT":
+                continue
+
+            compared += 1
+            if a == b:
+                matches += 1
+
+        if compared == 0:
+            return 0.0
+
+        return (matches / compared) * 100.0
+
+    with open(output_file, "w") as out:
+        # keep at least 11 columns so parse_alnPairDist() still works
+        out.write("seq1\tseq2\tcol3\tcol4\tcol5\tcol6\tcol7\tcol8\tcol9\tcol10\tpid\n")
+
+        for (id1, seq1), (id2, seq2) in itertools.combinations(records, 2):
+            pid = calc_pid(seq1, seq2)
+
+            out.write(
+                f"{id1}\t{id2}\t.\t.\t.\t.\t.\t.\t.\t.\t{pid:.6f}\n"
+            )
 
     logging.info(f"Saved pairwise distances to: {output_file}")
-
-
-#def compute_ani_from_alignment(alignment_fasta, target_id=None):
-#    """
-#    Compute the average neighbor identity for organellar genomes.
-#    """
-#    records = list(SeqIO.parse(alignment_fasta, "fasta"))
-#
-#    if target_id:
-#        target_record = next((r for r in records if target_id in r.id), None)
-#    else:
-#        target_record = records[0]
-#
-#    target_seq = str(target_record.seq).upper()
-#    results = {}
-#
-#    for rec in records:
-#        if rec.id == target_record.id:
-#            continue
-#
-#        seq = str(rec.seq).upper()
-#
-#        matches = 0
-#        valid_sites = 0
-#
-#        for a, b in zip(target_seq, seq):
-#            if a in "-N" or b in "-N":
-#                continue
-#            valid_sites += 1
-#            if a == b:
-#                matches += 1
-#
-#        ani = matches / valid_sites if valid_sites > 0 else 0
-#
-#        results[rec.id] = {
-#            "ani": ani,
-#            "aligned_sites": valid_sites
-#        }
-#
-#    return results, target_record.id
-
+    
 
 def assign_alignment_ani(species_dict, ani_results):
     for sp, entries in species_dict.items():

@@ -8,8 +8,8 @@
 </div>
 
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genomes and genes for biodiversity research
-Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial and nuclear genomes
-for evolutionary, taxoomic, and bioidiversity research – saving you time and keeping genomics fun.
+Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial, and nuclear genomes
+for evolutionary, taxonomic, and biodiversity research – saving you time and keeping genomics fun.
 
 **LATEST UPDATE**
 GenomeXtract is now available as Bioconda package:
@@ -91,12 +91,12 @@ options:
 
 ### findClosestGenome
 
-**This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI.**
+**This script automatically finds the closest available reference genome sequence(s) of a given taxon in NCBI.
 This script automatically finds the closest available plastid, mitochondrial, or nuclear genome sequence(s) from any given taxon in the public NCBI database.
 It ranks the species according to their genetic similarity to the target taxon sequence based on average nucleotide identity (ANI) for 
 plastid genomes or by using mash-based distance (Ondov et al., 2016; https://mash.readthedocs.io/en/latest/index.html) for mitochondrial and nuclear genomes. Alternatively, the script can be used to find all genome sequences 
 for a given taxonomic group by selecting the largest genome sequence or a user-specfied genome size as target. The script also automatically filters misaligned samples (organellar genomes), 
-or collapses all individuals of a given taxon for genetic similarity comparisons. **If you are using the 'nuclear genome' option, please ensure that there is enough space available in your local home directory.**
+or collapses all individuals of a given taxon for genetic similarity comparisons. If you are using the 'nuclear genome' option, please ensure that there is enough space available in your local home directory.**
 
 ```
 # basic code:
@@ -151,7 +151,7 @@ options:
 ```
 
 ### assembleOrgGenome
-**This script automatically extracts and compares gene features, and aligns plastid genome sequences from files downloaded from NCBI.**
+**This script automatically extracts and compares gene features, and aligns plastid genome sequences from files downloaded from NCBI. It creates MaxLik trees using either RAxML or IQ-TREE.**
 
 ```
 # basic code:
@@ -199,7 +199,7 @@ options:
 ```
 
 ### assembleOrgGenes
-**This script automatically extracts and compares organellar gene features, and aligns organellar gene sequences from files downloaded from NCBI.**
+**This script automatically extracts and compares organellar gene features, and aligns organellar gene sequences from files downloaded from NCBI. It creates a coalescent-based species tree using ASTRAL.**
 
 ```
 # basic code:

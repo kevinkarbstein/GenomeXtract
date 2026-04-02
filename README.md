@@ -48,7 +48,7 @@ conda install bioconda::mash                # v2.3
 
 ### findGenome
 
-**This script automatically downloads and filters organellar and nuclear genome sequence(s) from the NCBI database.**
+**This script automatically downloads and filters organellar and nuclear genome sequence(s) from the NCBI database. Downloads can be filtered by maximum number of individuals per taxon and duplicate sequences regarding organellar genome sequences and assembly level and available gene annotations regarding nuclear genome sequences.**
 
 ```
 # basic code:
@@ -151,7 +151,7 @@ options:
 ```
 
 ### assembleOrgGenome
-**This script automatically extracts and compares gene features, and aligns plastid genome sequences from files downloaded from NCBI. It creates MaxLik trees using either RAxML or IQ-TREE.**
+**This script automatically extracts and compares gene features, and aligns plastid genome sequences from files downloaded from NCBI. Gene feature tables can be used to study gene loss in specific evolutionary lineages. The script also creates MaxLik trees using either RAxML or IQ-TREE.**
 
 ```
 # basic code:
@@ -199,7 +199,7 @@ options:
 ```
 
 ### assembleOrgGenes
-**This script automatically extracts and compares organellar gene features, and aligns organellar gene sequences from files downloaded from NCBI. It creates a coalescent-based species tree using ASTRAL.**
+**This script automatically extracts and compares organellar gene features, and aligns organellar gene sequences from files downloaded from NCBI. Gene feature tables can be used to study gene loss in specific evolutionary lineages. The script also creates a coalescent-based species tree using ASTRAL.**
 
 ```
 # basic code:

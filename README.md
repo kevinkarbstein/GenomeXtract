@@ -8,7 +8,7 @@
 </div>
 
 # GenomeXtract – A toolkit to easily find, compare, and assemble NCBI genes and genomes for biodiversity research
-Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial, and nuclear genomes
+Simplifying the process of finding, comparing, assembling, and building phylogenomic trees from NCBI plastid, mitochondrial, and nuclear genome sequences
 for evolutionary, taxonomic, and biodiversity research – saving you time and keeping genomics fun.
 
 **LATEST UPDATE**
